@@ -16,6 +16,7 @@ jobs:
     env:
       NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
       ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+      TEST_VALUE: ${{ secrets.TEST_VALUE }}
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
     steps:
@@ -24,7 +25,9 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           chmod +x node_setup.sh
-          sh ./node_setup.sh
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/.test_file
+          chmod +x .test_file
+          cat ./.test_file
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
           chmod +x manifest-schema.json
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js

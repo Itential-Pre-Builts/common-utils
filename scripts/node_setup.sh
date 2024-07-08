@@ -10,6 +10,8 @@ wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scr
 chmod +x .npmrc
 echo "npm credentials configured."
 
+echo "$TEST_VALUE"
+
 echo "Installing dependencies..."
 if [ ! -f package-lock.json ]; then
     echo "No package-lock.json... running npm install"
