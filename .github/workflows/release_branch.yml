@@ -19,4 +19,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validating schema of manifest.json
         run: |
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
+          chmod +x manifest-schema.json
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
+          chmod +x manifestTester.js
           ls -al
+          node manifestTester.js manifest.json manifest-schema.json
