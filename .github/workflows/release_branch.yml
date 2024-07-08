@@ -22,6 +22,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validating schema of manifest.json
+        env:
+          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+          TEST_VALUE: ${{ secrets.TEST_VALUE }}
         run: |
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           chmod +x node_setup.sh
