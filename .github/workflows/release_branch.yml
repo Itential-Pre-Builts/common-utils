@@ -18,6 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validating schema of manifest.json
+        shell: bash
         env:
           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
