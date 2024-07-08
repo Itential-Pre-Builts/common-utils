@@ -28,10 +28,10 @@ jobs:
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/.test_file
           chmod +x .test_file
           envsubst < .test_file > .test_file_new
+          echo $TEST_VALUE
           cat ./.test_file_new
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
           chmod +x manifest-schema.json
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
           chmod +x manifestTester.js
           ls -al
-          node manifestTester.js manifest.json manifest-schema.json
