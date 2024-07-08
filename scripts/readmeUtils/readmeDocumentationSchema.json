@@ -1,0 +1,532 @@
+{
+  "$id": "readmeDocumentation",
+  "description": "Schema for readme.json files",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "name",
+    "overview",
+    "type",
+    "deprecated"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the Project. Should be in the format: <Vendor> - <Model> - <Protocol> if a Workflow Project, i.e. Itential - IAP - REST or Palo Alto - Panorama - REST"
+    },
+    "webName": {
+      "type": "string",
+      "description": "Enter descriptive name to be used on itential.com website for this project."
+    },
+    "overview": {
+      "type": "string",
+      "description": "Provide a short overview of the project:\nEx. Project for assets around Palo Alto Panorama using REST protocol"
+    },
+    "type": {
+      "type": "string",
+      "description": "Select the type of this Project",
+      "enum": [
+        "Workflow Project",
+        "Transformation Project",
+        "Example Project"
+      ]
+    },
+    "domains": {
+      "type": "array",
+      "description": "List of domains that this project can be associated with",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Cloud",
+          "Data Center",
+          "SD-WAN (SASE)",
+          "Campus",
+          "Security (SASE)",
+          "Network Services",
+          "5G/4G Mobility",
+          "Inventory",
+          "Discovery & Topology",
+          "Testing",
+          "CI/CD",
+          "Service Assurance",
+          "ITSM (Service Management)",
+          "Notifications",
+          "Events Streaming",
+          "Data Storage",
+          "Observability",
+          "AIOps"
+        ]
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags for this Project that Itential uses to categorize and search for this Project",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Configuration & Compliance",
+          "Network Infrastructure Changes",
+          "Cloud Infrastructure Changes",
+          "Security Policy Management",
+          "Software Upgrades & Device Maintenance",
+          "Notifications & Ticket Management",
+          "Monitoring & Troubleshooting",
+          "Hybrid & Multi Cloud Orchestration",
+          "CI/CD & Self-Service",
+          "5G & Edge Network Changes",
+          "Change Management",
+          "Cloud Networking",
+          "Configuration Management",
+          "Ticket/Issue Management",
+          "Catalog Request",
+          "Domain Name Service",
+          "DNS",
+          "Firewall",
+          "IP Address Management",
+          "IPAM",
+          "Notify",
+          "Reporting",
+          "Pipeline",
+          "Version Control",
+          "Build and Deploy",
+          "Service Requests",
+          "Virtual Compute",
+          "Security Rule Management",
+          "Security Policy",
+          "Telemetry",
+          "Alert Management",
+          "Log Management",
+          "Onboarding",
+          "CMDB",
+          "Shipping",
+          "Tracking",
+          "Voice",
+          "VoIP",
+          "Subscriber Management",
+          "Network Provisioning",
+          "Subnets",
+          "VPNs",
+          "Transit Gateways",
+          "Multi-Cloud",
+          "Scalable Data Storage",
+          "Observability",
+          "Analytics",
+          "Monitoring",
+          "Diagnostics",
+          "Alerts",
+          "Notifications",
+          "Password Management",
+          "Secret Management",
+          "Network Fabric",
+          "Network Orchestration",
+          "Optical Networking"
+        ]
+      }
+    },
+    "useCases": {
+      "type": "array",
+      "description": "Use cases to associate with this project",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Router configuration backup or restore",
+          "Run network compliance checks and remediation",
+          "Determine configuration drift",
+          "AWS security group compliance",
+          "Golden Configuration",
+          "API Compliance",
+          "Load Balancer Provisioning",
+          "Port/VLAN Configuration",
+          "Device Onboarding",
+          "DNS Management",
+          "EVPN & VXLAN",
+          "Port Turn-up",
+          "Assign Network & IP",
+          "Create A Record",
+          "Bulk IP Address Allocation",
+          "Cloud Managed Networks",
+          "Managing the Lifecycle of a Service",
+          "VNet or VPC deploy/management",
+          "AWS Security Group updates",
+          "Deploy AWS EC2 instance",
+          "Create Azure Virtual Gateway",
+          "Provision VPC & EC2 Instance",
+          "Security Rule Creation using controller",
+          "Security Rule Creation using CLI",
+          "Security Rule Removal",
+          "Software Upgrade",
+          "Update syslog server",
+          "Update time server",
+          "Send message on Slack channel",
+          "Send message on Teams channel",
+          "Send an email message",
+          "Create & Update Change Request",
+          "Create & Update Incident Ticket",
+          "Update Change Request state",
+          "Create Jira issue",
+          "Add Device to Monitoring",
+          "Automated network data gathering for diagnostics",
+          "Verify network connectivity",
+          "Connect VPC and VNet",
+          "Connect router to transit gateway",
+          "Route across GCP & Azure",
+          "Connect sites across cloud platforms",
+          "CI/CD Pipeline",
+          "Itential Automation Gateway  Intro with Decoration & Execution",
+          "Provision, update, manage or remove Overlay Networks",
+          "Provision, update, manage or remove Virtual Private Networks",
+          "Automate the configuration of items to provision, update, manage or remove Services",
+          "Changing of policies across a network to allow/prevent Flow of Traffic",
+          "Onboard, update, manage or remove Devices",
+          "Add, update, manage or remove Organizations and Sites",
+          "Perform a software upgrade on Device",
+          "Add, update, manage and remove Security Policies and Rules",
+          "Automate Security Rule Validation",
+          "Add, update, manage or remove DNS Entry",
+          "Create, update, manage or remove Hybrid Cloud Connections",
+          "Create, update, manage, or remove 4G/5G Mobile Core Network Function (Gateway/UPF/SMF/etc)",
+          "4G/5G Policy Management",
+          "ORAN Configuration Lifecycle Management",
+          "5G Network Slicing",
+          "IP Mobile Backhaul config Lifecycle Management",
+          "5G MEC Tenant Lifecycle",
+          "Add or remove Virtual Machine Images",
+          "Instantiate, manage, remove Virtual Machine Instances",
+          "Deploy Virtual Services and Functions",
+          "Determine available Cloud Resources",
+          "Assign resources to Virtual Machine Instances",
+          "Add or remove Virtual Networks",
+          "Management of Cloud Network Assignments",
+          "Management of Cloud Storage",
+          "Reserve, assign, unassign, or release IP Addresses",
+          "Reserve, assign, unassign, or release Ports",
+          "Create Device Backups/Snapshots for Audit, Compliance, and Rollbacks",
+          "Validate Device Configuration before/after Network Changes",
+          "Inventory Reconciliation",
+          "Create, update, manage, remove Routing Policies",
+          "Traffic Path Analysis",
+          "Automate start of Testing Process",
+          "Retrieve Testing Information",
+          "Utilize IAP in a Testing Process",
+          "Automate Start of CI/CD Process",
+          "Create, update, manage and remove Projects",
+          "Automated Deployment of a new System, Application or Project",
+          "Versioning of Infrastructure Configuration",
+          "Automation of Network Configuration Changes from Repository",
+          "Pre & Post check of Alerts & Metrics on device during automations",
+          "Add, update, manage or remove item to/from Monitoring",
+          "Place item into and remove item from maintenance mode",
+          "Create Alert on item when issues arise during Automation",
+          "Clear alerts for item after Automation to fix issues",
+          "Create, update, complete or cancel Change Management Requests",
+          "Create, update, complete or cancel Catalog Request Items",
+          "Create, update, close or cancel tickets/issues for Problems/Solutions during Automations",
+          "Add, update, manage or remove assets to/from CMDB systems",
+          "Update, close, or cancel a Service Order during Automations",
+          "Create and update Knowledge Base Articles",
+          "Start Automation in Itential",
+          "Consume messages from a Messaging Bus/System and use these to trigger Itential Automations",
+          "Send messages to a Messaging Bus/System for use by other Systems to take appropriate Actions.",
+          "Notification when an Automation Begins/Completes",
+          "Notification when Manual Intervention is needed in an Itential Job",
+          "Notification when issue during an Automation",
+          "Notification when issue on the Network",
+          "Create, retrieve, update and delete data in/from persistent storage",
+          "Return, Ship & Track packages",
+          "Provisioning and management of Network Elements",
+          "Manage subscriber profiles, services and billing",
+          "Provision and management voice and data for devices",
+          "Setup and manage VPNs",
+          "Create, update, manage or remove Transit Gateways",
+          "Store, backup, restore and archive data",
+          "Manage data versioning",
+          "Closed loop incident resolution",
+          "Preventive network diagnostics",
+          "Add device for monitoring",
+          "Automate the credential and user accounts creation and removal",
+          "Access and manage credentials",
+          "Add, update, manage or remove Tenant",
+          "Provisioning and Management of Optical Service",
+          "Software Upgrades",
+          "Data Center",
+          "Load Balancer Management",
+          "Firewall Policy Management",
+          "Network Configuration Management",
+          "Network Compliance",
+          "Network Service Management",
+          "Network Device Provisioning",
+          "Cloud Networking",
+          "SD-WAN & SASE",
+          "Hybrid & Multi-Cloud",
+          "Multi-Domain Orchestration",
+          "5G/Edge"
+        ]
+      }
+    },
+    "demoLinks": {
+      "type": "array",
+      "description": "Links to Itential demos associated with this Project",
+      "default": [],
+      "items": {
+        "type": "object",
+        "description": "Information about link to Itential demo",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Display title for the Itential demo link",
+            "default": "",
+            "examples": [
+              "<Verb> <Noun>"
+            ]
+          },
+          "link": {
+            "type": "string",
+            "description": "Link to the Itential demo",
+            "default": "",
+            "examples": [
+              "<link>"
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "link"
+        ]
+      }
+    },
+    "trainingLinks": {
+      "type": "array",
+      "description": "Links to Itential training associated with this Project",
+      "default": [],
+      "items": {
+        "type": "object",
+        "description": "Information about link to Itential training",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Display title for the Itential training link",
+            "default": "",
+            "examples": [
+              "<Verb> <Noun>"
+            ]
+          },
+          "link": {
+            "type": "string",
+            "description": "Link to the Itential training link",
+            "default": "",
+            "examples": [
+              "<link>"
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "link"
+        ]
+      }
+    },
+    "faqLink": {
+      "type": "string",
+      "description": "Enter link to FAQ related to this project"
+    },
+    "webLink": {
+      "type": "string",
+      "description": "Provide link to Project on itential.com website if one exists such as for Palo Alto Panorama Workflow Project at https://www.itential.com/automations/create-pre-post-security-rules-with-panorama-for-palo-alto-firewalls/"
+    },
+    "contributeLink": {
+      "type": "string",
+      "description": "Enter link to page for contributing to this project"
+    },
+    "productLink": {
+      "type": "string",
+      "description": "Link to the vendor's product website related to this Project. For example https://www.alkira.com/cloud-network-as-a-service/ "
+    },
+    "vendorLink": {
+      "type": "string",
+      "description": "Link to the vendor's website related to this Project. For example https://www.alkira.com/ for Alkira"
+    },
+    "storeLink": {
+      "type": "string",
+      "description": "Link to a vendor store where the Project (typically an Ecosystem Application) can be downloaded from. For example https://store.servicenow.com/sn_appstore_store.do#!/store/home for the Itential Automation Services Ecosystem Application."
+    },
+    "docLink": {
+      "type": "string",
+      "description": "Link to the documentation for this Project. If Itential Docs Site -> Opensource page is published under https://docs.itential.com/opensource/docs/library-1 provide that link. Otherwise, link to GitLab repository README."
+    },
+    "issueLink": {
+      "type": "string",
+      "description": "Link to information on how you should report issues with the Project, for example https://itential.atlassian.net/servicedesk/customer/portals"
+    },
+    "deprecated": {
+      "type": "object",
+      "properties": {
+        "isDeprecated": {
+          "type": "boolean",
+          "description": "Whether this Project has been deprecated",
+          "default": false
+        },
+        "deprecatedOn": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date",
+              "description": "The date the Project was deprecated",
+              "default": "",
+              "examples": [
+                "2023-08-20"
+              ]
+            },
+            {
+              "type": "string",
+              "maxLength": 0,
+              "description": "The date the Project was deprecated",
+              "default": "",
+              "examples": [""]
+            }
+          ]
+        },
+        "endOfLife": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date",
+              "description": "The date the Project will no longer be supported",
+              "default": "",
+              "examples": [
+                "2024-08-20"
+              ]
+            },
+            {
+              "type": "string",
+              "maxLength": 0,
+              "description": "The date the Project will no longer be supported",
+              "default": "",
+              "examples": [""]
+            }
+          ]
+        },
+        "replacedBy": {
+          "type": "object",
+          "description": "Information about what is replacing this Project",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name identifying the replacement",
+              "default": "",
+              "examples": [
+                "PaloAlto Panorama REST"
+              ]
+            },
+            "webName": {
+              "type": "string",
+              "description": "Descriptive name of the replacement",
+              "default": "",
+              "examples": [
+                "ServiceNow ITSM Adapter",
+                "Project containing PaloAlto Panorama Automations that utilize REST protocol"
+              ]
+            },
+            "isProductFeature": {
+              "type": "boolean",
+              "description": "Whether the replacement is a Product feature",
+              "default": false
+            },
+            "overview": {
+              "type": "string",
+              "description": "Description of the new Project",
+              "default": "",
+              "examples": [
+                "New Project containing all PaloAlto Panorama REST Automations"
+              ]
+            },
+            "repoLink": {
+              "type": "string",
+              "description": "Link to the repository where the Project can be found",
+              "default": "",
+              "examples": [
+                "https://gitlab.com/itentialopensource/adapters/itsm-testing/adapter-servicenow"
+              ]
+            },
+            "docLink": {
+              "type": "string",
+              "description": "Link to where the Project documentation can be found",
+              "default": "",
+              "examples": [
+                "https://docs.itential.com/opensource/docs/servicenow"
+              ]
+            },
+            "webLink": {
+              "type": "string",
+              "description": "Link to where the Project Itential marketing information can be found",
+              "default": "",
+              "examples": [
+                "https://www.itential.com/adapters/servicenow/"
+              ]
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "isProductFeature": {
+                    "enum": [
+                      true
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "docLink"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "isProductFeature": {
+                    "enum": [
+                      false
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "webName",
+                  "repoLink"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "isDeprecated"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "isDeprecated": {
+                "enum": [
+                  true
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "deprecatedOn",
+              "endOfLife",
+              "replacedBy"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

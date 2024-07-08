@@ -1,0 +1,4990 @@
+{
+  "@itential/adapter-automation_gateway": {
+    "id": "AutomationGateway",
+    "type": "AutomationGateway",
+    "properties": {
+      "host": "20211.dsup.itential.io",
+      "port": 8083,
+      "base_path": "",
+      "version": "v2.0",
+      "cache_location": "none",
+      "stub": true,
+      "protocol": "http",
+      "authentication": {
+        "auth_method": "request_token",
+        "username": "",
+        "password": "",
+        "token": "",
+        "token_user_field": "username",
+        "token_password_field": "password",
+        "token_result_field": "token",
+        "token_URI_path": "/api/v2.0/login",
+        "invalid_token_error": 401,
+        "token_timeout": 6000,
+        "token_cache": "local",
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "{token}"
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "protocol": "REST",
+        "URI_Path": "/api/v1.0/devices"
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "failover_codes": [],
+        "attempt_timeout": 1200000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false
+      }
+    }
+  },
+  "@itential/adapter-nso": {
+    "id": "NSO",
+    "type": "NSO",
+    "brokers": [
+      "device",
+      "method",
+      "service"
+    ],
+    "groups": [],
+    "properties": {
+      "http": {
+        "host": "",
+        "port": 8080
+      },
+      "ssl": {
+        "enabled": false,
+        "acceptInvalidCerts": false,
+        "caFile": "/etc/ipa/ca.crt",
+        "ciphers": "ECDHE-RSA-AES128-GCM-SHA256"
+      },
+      "netconf": {
+        "host": "",
+        "port": 2022,
+        "protocol": "ssh",
+        "frame_size": 16376
+      },
+      "credentials": {
+        "user": "",
+        "passwd": ""
+      },
+      "commitWait": 5000,
+      "commitQueue": false,
+      "authenticationStrategy": {
+        "type": "machine",
+        "location": "",
+        "method": ""
+      },
+      "max_reconnect_attempts": 0,
+      "total_reconnect_window": 120,
+      "min_reconnect_interval": 30,
+      "max_reconnect_interval": 900,
+      "poolSize": 3,
+      "netconfSubscriptions": [],
+      "liveStatusProps": []
+    }
+  },
+  "@itentialopensource/adapter-alkira": {
+    "id": "Alkira",
+    "type": "Alkira",
+    "brokers": [
+      "device"
+    ],
+    "groups": [],
+    "properties": {
+      "host": "portal.alkira.com",
+      "port": 443,
+      "base_path": "/api",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "request_token",
+        "username": "username",
+        "password": "password",
+        "token": "************",
+        "token_user_field": "username",
+        "token_password_field": "password",
+        "token_result_field": "token",
+        "token_URI_path": "",
+        "invalid_token_error": 401,
+        "token_timeout": 3600000,
+        "token_cache": "local",
+        "auth_field": "header.headers.Cookie",
+        "auth_field_format": "JSESSIONID={token};SESSION={tokenp2}",
+        "auth_logging": true,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "protocol": "REST",
+        "URI_Path": "",
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "attempt_timeout": 15000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": true
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 443,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 443,
+        "database": "",
+        "username": "",
+        "password": "************",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/tenantnetworks/{tenantNetworkId}/connectors",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "tenantNetworkId": "port"
+            },
+            "responseFields": {
+              "name": "name",
+              "ostype": "type",
+              "ostypePrefix": "connector-",
+              "port": "tenantNetworkId",
+              "ip": "id",
+              "ipaddress": "id"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/tenantnetworks/{tenantNetworkId}/connectors",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "tenantNetworkId": "170"
+            },
+            "responseFields": {
+              "name": "name",
+              "ostype": "type",
+              "ostypePrefix": "connector-",
+              "port": "tenantNetworkId",
+              "ip": "id",
+              "ipaddress": "id",
+              "connectorId": "id"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/tenantnetworks/{tenantNetworkId}/health/connector/{connectorId}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "requestFields": {
+              "tenantNetworkId": "port",
+              "connectorId": "connectorId"
+            },
+            "handleFailure": "ignore",
+            "responseFields": {
+              "status": "connectivityStatus",
+              "statusValue": "100"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/tenantnetworks/{tenantNetworkId}/connectors/{connectorId}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "requestFields": {
+              "tenantNetworkId": "port",
+              "connectorId": "connectorId"
+            },
+            "handleFailure": "ignore",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/tenantnetworks/{tenantNetworkId}/connectors",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "requestFields": {
+              "tenantNetworkId": "170"
+            },
+            "handleFailure": "ignore",
+            "responseFields": {}
+          }
+        ]
+      }
+    }
+  },
+  "@itentialopensource/adapter-aviatrix": {
+    "id": "Adapter-aviatrix",
+    "type": "Aviatrix",
+    "properties": {
+      "host": "example.com",
+      "port": 443,
+      "base_path": "/",
+      "version": "v1",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "request_token",
+        "username": "username",
+        "password": "password",
+        "token": "token",
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "url",
+        "auth_field_format": "CID={token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 600000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-aws_ec2": {
+    "id": "Adapter-aws_ec2",
+    "type": "Awsec2",
+    "properties": {
+      "host": "example.com",
+      "region": "",
+      "port": 443,
+      "base_path": "",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "http",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token_user_field": "username",
+        "token_password_field": "password",
+        "token_result_field": "token",
+        "token_URI_path": "",
+        "invalid_token_error": 401,
+        "token_timeout": -1,
+        "token_cache": "local",
+        "auth_field": "header.headers.X-AUTH-TOKEN",
+        "auth_field_format": "{token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "protocol": "REST",
+        "URI_Path": "",
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 443,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 27017,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {}
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-aws_s3": {
+    "id": "awss3",
+    "type": "Awss3",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "s3.amazonaws.com",
+      "region": "us-east-1",
+      "port": 443,
+      "base_path": "/",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "no_authentication",
+        "username": "username",
+        "password": "password",
+        "token": "",
+        "token_timeout": 180000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Cookie",
+        "auth_field_format": "Token {token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": "",
+        "aws_access_key": "<access_key_here>",
+        "aws_secret_key": "<secret_key_here>",
+        "aws_session_token": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "failover_codes": [],
+        "attempt_timeout": 30000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": true,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    }
+  },
+  "@itentialopensource/adapter-azure": {
+    "id": "Adapter-azure",
+    "type": "Azure",
+    "properties": {
+      "host": "management.azure.com",
+      "port": 443,
+      "base_path": "/",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "save_metric": true,
+      "stub": true,
+      "protocol": "https",
+      "apiVersion": "2019-11-01",
+      "subscriptionId": "replace_subscriptionId",
+      "resourceGroup": [
+        "sample-resourceGroup-1",
+        "sample-resourceGroup-2"
+      ],
+      "authentication": {
+        "auth_method": "request_token",
+        "username": "username",
+        "password": "password",
+        "token": "token",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Bearer {token}",
+        "auth_logging": false,
+        "tenant_id": "replace_tenant_id",
+        "client_id": "replace_client_id",
+        "grant_type": "client_credentials",
+        "client_secret": "replace_client_secret"
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-azure_devops": {
+    "id": "azure_devops",
+    "type": "AzureDevops",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "dev.azure.com",
+      "port": 443,
+      "base_path": "/",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "",
+        "password": "",
+        "token": "token",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "request": {
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "attempt_timeout": 15000,
+        "healthcheck_on_timeout": true
+      }
+    }
+  },
+  "@itentialopensource/adapter-batfish": {
+    "id": "Adapter-batfish",
+    "type": "Batfish",
+    "properties": {
+      "host": "X.X.X.X",
+      "port": 443,
+      "stub": true,
+      "authentication": {
+        "auth_method": "static_token",
+        "username": "username",
+        "password": "password",
+        "token": "superSecretTokenGoesHere",
+        "invalid_token_error": 401,
+        "token_timeout": 60000,
+        "token_cache": "local",
+        "auth_field": "header.headers.authorization",
+        "auth_field_format": "{token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": true,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "./keys/iap-demo.intentionet.com.crt",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "base_path": "",
+      "version": "",
+      "cache_location": "none",
+      "protocol": "https",
+      "healthcheck": {
+        "type": "none"
+      },
+      "throttle": {},
+      "request": {},
+      "proxy": {},
+      "visibility": {},
+      "save_metric": false,
+      "mongo": {}
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-bitbucket": {
+    "id": "bitbucket",
+    "type": "Bitbucket",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "api.bitbucket.org",
+      "port": 443,
+      "base_path": "",
+      "version": "2.0",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token": "",
+        "token_timeout": 180000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": true,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      }
+    }
+  },
+  "@itentialopensource/adapter-bitbucket_server": {
+    "id": "bitbucket_server",
+    "type": "BitbucketServer",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "host.docker.internal",
+      "port": 7990,
+      "base_path": "rest/api",
+      "version": "1.0",
+      "cache_location": "none",
+      "encode_pathvars": false,
+      "save_metric": true,
+      "stub": true,
+      "protocol": "http",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "",
+        "password": "",
+        "token": "",
+        "invalid_token_error": 401,
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": true
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "query_object": {}
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false,
+        "delay_between_requests": 2000
+      }
+    }
+  },
+  "@itentialopensource/adapter-db_mongo": {
+    "id": "db_mongo",
+    "type": "db_mongo",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "db": "iap",
+      "host": "mongodb",
+      "port": 27017,
+      "databaseConnection": "connect on request",
+      "createUuid": true,
+      "credentials": {
+        "dbAuth": true,
+        "user": "",
+        "passwd": ""
+      },
+      "ssl": {
+        "enabled": false,
+        "acceptInvalidCerts": false,
+        "sslCA": "",
+        "checkServerIdentity": false
+      },
+      "replSet": {
+        "enabled": false,
+        "replicaSet": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "query_object": {}
+      }
+    }
+  },
+  "@itentialopensource/adapter-db_mysql": {
+    "id": "mysql",
+    "type": "MySQL",
+    "properties": {
+      "database": "your database name",
+      "host": "localhost",
+      "port": 3306,
+      "authentication": {
+        "dbAuth": false,
+        "username": "your username",
+        "password": "your password"
+      },
+      "ssl": {
+        "enabled": false,
+        "accept_invalid_cert": true,
+        "ca_file": ""
+      },
+      "connectionOptions": {
+        "connectTimeout": 10000,
+        "acquireTimeout": 10000,
+        "waitForConnections": true,
+        "connectionLimit": 10,
+        "queueLimit": 0
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 60000
+  },
+  "@itentialopensource/adapter-dna_center": {
+    "id": "dna_center",
+    "type": "DnaCenter",
+    "properties": {
+      "host": "localhost",
+      "port": 443,
+      "choosepath": "",
+      "base_path": "/dna/intent/api",
+      "version": "v1",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "request_token",
+        "username": "exampleUsername",
+        "password": "examplePassword",
+        "token": "",
+        "token_timeout": 180000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.X-Auth-Token",
+        "auth_field_format": "{token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": "",
+        "sensitive": [],
+        "sso": {
+          "protocol": "",
+          "host": "",
+          "port": 0
+        },
+        "multiStepAuthCalls": [
+          {
+            "name": "",
+            "requestFields": {},
+            "responseFields": {},
+            "successfullResponseCode": 200
+          }
+        ]
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {},
+        "addlHeaders": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "failover_codes": [],
+        "attempt_timeout": 10000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "pagination": {
+              "offsetVar": "",
+              "limitVar": "",
+              "incrementBy": "limit",
+              "requestLocation": "query"
+            },
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      },
+      "cache": {
+        "enabled": false,
+        "entities": [
+          {
+            "entityType": "",
+            "frequency": 1440,
+            "flushOnFail": false,
+            "limit": 1000,
+            "retryAttempts": 5,
+            "sort": true,
+            "populate": [
+              {
+                "path": "",
+                "method": "GET",
+                "pagination": {
+                  "offsetVar": "",
+                  "limitVar": "",
+                  "incrementBy": "limit",
+                  "requestLocation": "query"
+                },
+                "query": {},
+                "body": {},
+                "headers": {},
+                "handleFailure": "ignore",
+                "requestFields": {},
+                "responseDatakey": "",
+                "responseFields": {}
+              }
+            ],
+            "cachedTasks": [
+              {
+                "name": "",
+                "filterField": "",
+                "filterLoc": ""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 60000
+  },
+  "@itentialopensource/adapter-email": {
+    "id": "email-open-source",
+    "type": "EmailOpensource",
+    "brokers": [
+      "notification"
+    ],
+    "properties": {
+      "host": "smtp.example.com",
+      "port": 587,
+      "secure": true,
+      "incomingEmailSizeLimit": 10000
+    }
+  },
+  "@itential/adapter-email": {
+    "id": "email",
+    "type": "Email",
+    "brokers": [
+      "notification"
+    ],
+    "groups": [],
+    "properties": {
+      "auth": {
+        "user": "user@email.com",
+        "pass": "pass"
+      },
+      "host": "outlook.office365.com",
+      "tls": {
+        "isServer": false,
+        "requestCert": false,
+        "rejectUnauthorized": true
+      },
+      "incomingEmailSizeLimit": 1000000,
+      "service": "Outlook365",
+      "port": 993,
+      "secure": true,
+      "connectionTimeout": 10005,
+      "greetingTimeout": 10000,
+      "socketTimeout": 10000
+    }
+  },
+  "@itentialopensource/adapter-f5_bigiq": {
+    "id": "F5-BIG-IQ",
+    "type": "F5BigIQ",
+    "properties": {
+      "host": "localhost",
+      "port": 443,
+      "base_path": "/",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token": "token",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-forwardnetworks": {
+    "id": "Adapter-forwardnetworks",
+    "type": "ForwardNetworks",
+    "properties": {
+      "host": "localhost",
+      "port": 443,
+      "base_path": "/",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token": "token",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-git": {
+    "id": "git",
+    "type": "Git",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "host",
+      "port": 7990,
+      "base_path": "rest/api",
+      "version": "1.0",
+      "cache_location": "none",
+      "encode_pathvars": false,
+      "save_metric": true,
+      "stub": true,
+      "protocol": "http",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "",
+        "password": "",
+        "token": "",
+        "invalid_token_error": 401,
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": true
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "query_object": {}
+      }
+    }
+  },
+  "@itentialopensource/adapter-gitlab": {
+    "id": "gitlab",
+    "type": "Gitlab",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "gitlab.com",
+      "port": 443,
+      "stub": true,
+      "authentication": {
+        "auth_method": "static_token",
+        "username": "",
+        "password": "",
+        "token": "",
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Private-Token",
+        "auth_field_format": "{token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "query_object": {}
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 401,
+        "failover_codes": [],
+        "attempt_timeout": 60000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      }
+    }
+  },
+  "@itentialopensource/adapter-github": {
+    "id": "github",
+    "type": "GitHub",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "api.github.com",
+      "port": 443,
+      "stub": true,
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token": "",
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "query_object": {}
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 401,
+        "failover_codes": [],
+        "attempt_timeout": 60000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      }
+    }
+  },
+  "@itentialopensource/adapter-iap": {
+    "id": "Adapter-iap",
+    "type": "Iap",
+    "properties": {
+      "host": "itential.com",
+      "port": 443,
+      "base_path": "",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "save_metric": true,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "request_token",
+        "username": "username",
+        "password": "password",
+        "token": "token",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Cookie",
+        "auth_field_format": "token={token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-infoblox": {
+    "id": "infoblox",
+    "type": "Infoblox",
+    "properties": {
+      "host": "localhost",
+      "port": 443,
+      "base_path": "/wapi",
+      "version": "v2.7",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token": "",
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 401,
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": true,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-ipfabric": {
+    "id": "Adapter-ipfabric",
+    "type": "IpFabric",
+    "properties": {
+      "host": "localhost",
+      "port": 443,
+      "base_path": "/api/v1",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "no_authentication",
+        "username": "username",
+        "password": "password",
+        "token": "token",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-jira": {
+    "id": "jira",
+    "type": "Jira",
+    "properties": {
+      "host": "your_host.atlassian.net",
+      "port": 443,
+      "base_path": "/rest/api",
+      "version": "2",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "exampleUsername",
+        "password": "examplePassword",
+        "token": "",
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 401,
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 60000
+  },
+  "@itentialopensource/adapter-kafka": {
+    "id": "kafka",
+    "type": "Kafka",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "localhost",
+      "port": 9092,
+      "registry_url": "",
+      "topics": [],
+      "interval_time": 5000,
+      "stub": true,
+      "client": {
+        "connectTimeout": 10000,
+        "requestTimeout": 30000,
+        "autoConnect": true,
+        "connectRetryOptions": {},
+        "idleConnection": 300000,
+        "reconnectOnIdle": true,
+        "maxAsyncRequests": 10,
+        "sslOptions": {},
+        "sasl": {}
+      },
+      "producer": {
+        "requireAcks": 1,
+        "ackTimeoutMs": 100,
+        "partitionerType": 0
+      },
+      "consumer": {
+        "groupId": "kafka-node-group",
+        "autoCommit": false,
+        "autoCommitIntervalMs": 5000,
+        "fetchMaxWaitMs": 100,
+        "fetchMinBytes": 1,
+        "fetchMaxBytes": 1048576,
+        "fromOffset": true,
+        "encoding": "utf8",
+        "keyEncoding": "utf8"
+      }
+    },
+    "logLevel": "none",
+    "timeout": 60000
+  },
+  "@itentialopensource/adapter-kafkav2": {
+    "id": "kafkav2",
+    "type": "Kafkav2",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "",
+      "port": 1,
+      "topics": [
+        {
+          "name": "kafkav2-example-topic",
+          "always": true,
+          "subscriberInfo": [
+            {
+              "subname": "default",
+              "filters": [],
+              "rabbit": "iap-example-topic",
+              "throttle": {}
+            }
+          ]
+        }
+      ],
+      "interval_time": 5000,
+      "stub": true,
+      "client": {
+        "logLevel": "logLevel.DEBUG",
+        "brokers": [
+          "kafka:9092"
+        ]
+      },
+      "producer": {},
+      "consumer": {
+        "groupId": "example-consumer-group"
+      }
+    },
+    "logLevel": "none",
+    "timeout": 60000
+  },
+  "@itentialopensource/adapter-kentik": {
+    "id": "Kentik v4",
+    "type": "Kentik",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "",
+      "port": 443,
+      "base_path": "",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "http",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "",
+        "password": "",
+        "token": "",
+        "token_user_field": "username",
+        "token_password_field": "password",
+        "token_result_field": "token",
+        "token_URI_path": "",
+        "invalid_token_error": 401,
+        "token_timeout": -1,
+        "token_cache": "local",
+        "auth_field": "header.headers.X-AUTH-TOKEN",
+        "auth_field_format": "{token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "intermittent",
+        "frequency": 300000,
+        "protocol": "REST",
+        "URI_Path": "",
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 443,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 443,
+        "database": "",
+        "username": "",
+        "password": "************",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {}
+    }
+  },
+  "@itentialopensource/adapter-kentik_v5": {
+    "id": "Kentik v5",
+    "type": "KentikV5",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "",
+      "port": 443,
+      "base_path": "",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "http",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "",
+        "password": "",
+        "token": "",
+        "token_user_field": "username",
+        "token_password_field": "password",
+        "token_result_field": "token",
+        "token_URI_path": "",
+        "invalid_token_error": 401,
+        "token_timeout": -1,
+        "token_cache": "local",
+        "auth_field": "header.headers.X-AUTH-TOKEN",
+        "auth_field_format": "{token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "intermittent",
+        "frequency": 300000,
+        "protocol": "REST",
+        "URI_Path": "",
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 443,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 443,
+        "database": "",
+        "username": "",
+        "password": "************",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {}
+    }
+  },
+  "@itentialopensource/adapter-meraki": {
+    "id": "meraki",
+    "type": "Meraki",
+    "properties": {
+      "host": "api.meraki.com",
+      "port": 443,
+      "base_path": "/api",
+      "version": "v1",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token": "",
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 401,
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/organizations/{orgID}/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "networkID": "627126248111459727",
+              "serial": "Q4AB-J4J8-6BJR",
+              "orgID": "1076949"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "serial",
+              "ostype": "model",
+              "ostypePrefix": "meraki-",
+              "port": "networkId",
+              "ipaddress": "mac"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/organizations/{orgID}/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "orgID": "1076949"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "serial",
+              "ostype": "model",
+              "ostypePrefix": "meraki-",
+              "port": "networkId",
+              "ipaddress": "mac",
+              "orgID": "1076949"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/organizations/{orgID}/networks/{networkID}/devices/{serial}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "networkID": "port",
+              "serial": "Q4AB-J4J8-6BJR",
+              "orgID": "1076949"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "return2xx",
+              "statusValue": "AD.200"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/organizations/{orgID}/networks/{networkID}/devices/{serial}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "networkID": "port",
+              "serial": "Q4AB-J4J8-6BJR",
+              "orgID": "1076949"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/organizations/{orgID}/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "orgID": "1076949"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          },
+          {
+            "path": "/organizations/{orgID}/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "orgID": "1076949"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 60000
+  },
+  "@itentialopensource/adapter-msteams": {
+    "id": "Adapter-msteams",
+    "type": "Msteams",
+    "properties": {
+      "host": "localhost",
+      "port": 443,
+      "base_path": "/",
+      "version": "v1.0",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "static_token",
+        "username": "exampleUsername",
+        "password": "examplePassword",
+        "token": "",
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.X-AUTH-TOKEN",
+        "auth_field_format": "{token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 401,
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-netbox": {
+    "id": "NetBox",
+    "type": "Netbox",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "demo.netbox.dev",
+      "port": 443,
+      "base_path": "/api",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "static_token",
+        "username": "username",
+        "password": "password",
+        "token": "52c41948e309ae49cb184e572202ddcb86657e85",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Token {token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "intermittent",
+        "frequency": 600000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "************",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    }
+  },
+  "@itentialopensource/adapter-netbox_v210": {
+    "id": "NetBox",
+    "type": "NetboxV210",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "demo.netbox.dev",
+      "port": 443,
+      "base_path": "/api",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "static_token",
+        "username": "username",
+        "password": "password",
+        "token": "52c41948e309ae49cb184e572202ddcb86657e85",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Token {token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "intermittent",
+        "frequency": 600000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "************",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    }
+  },
+  "@itentialopensource/adapter-netbox_v33": {
+    "id": "NetBox",
+    "type": "NetboxV33",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "demo.netbox.dev",
+      "port": 443,
+      "base_path": "/api",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "static_token",
+        "username": "username",
+        "password": "password",
+        "token": "52c41948e309ae49cb184e572202ddcb86657e85",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Token {token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "intermittent",
+        "frequency": 600000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "************",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    }
+  },
+  "@itentialopensource/adapter-panorama": {
+    "id": "Panorama",
+    "type": "Panorama",
+    "brokers": [],
+    "groups": [],
+    "properties": {
+      "host": "",
+      "port": 443,
+      "base_path": "/restapi",
+      "version": "9.0",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "<USER>",
+        "password": "<PASS>",
+        "token": "token",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": true,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-servicenow": {
+    "id": "Adapter-servicenow",
+    "type": "Servicenow",
+    "properties": {
+      "host": "localhost",
+      "port": 443,
+      "base_path": "/api",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token": "",
+        "token_timeout": 180000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 300000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 401,
+        "failover_codes": [
+          404,
+          405
+        ],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": true,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-slack": {
+    "id": "slack",
+    "type": "Slack",
+    "properties": {
+      "host": "slack.com",
+      "port": 443,
+      "base_path": "/api",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "static_token",
+        "username": "username",
+        "password": "password",
+        "token": "exampleToken",
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Bearer {token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "failover_codes": [],
+        "attempt_timeout": 10000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 60000
+  },
+  "@itentialopensource/adapter-solarwinds": {
+    "id": "solarwinds",
+    "type": "Solarwinds",
+    "properties": {
+      "host": "fqdn",
+      "port": 17778,
+      "base_path": "/SolarWinds/InformationService/v3/Json",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token": "token",
+        "invalid_token_error": 401,
+        "token_timeout": 1800000,
+        "token_cache": "local",
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 600000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "failover_codes": [],
+        "attempt_timeout": 10000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": false,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": true,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/get/devices/{id}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "name": "host",
+              "ostype": "os",
+              "ostypePrefix": "system-",
+              "ipaddress": "attributes.ipaddr",
+              "port": "443"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/get/devices/{id}/status",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "status",
+              "statusValue": "online"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/get/devices/{id}/configPart1",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "id": "name"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 60000
+  },
+  "@itentialopensource/adapter-versa_director": {
+    "id": "Adapter-versa_director",
+    "type": "VersaDirector",
+    "properties": {
+      "host": "localhost",
+      "port": 443,
+      "base_path": "/",
+      "version": "",
+      "cache_location": "none",
+      "encode_pathvars": false,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "basic user_password",
+        "username": "username",
+        "password": "password",
+        "token": "token",
+        "token_timeout": 600000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Basic {b64}{username}:{password}{/b64}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": [
+          0
+        ],
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": false,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      },
+      "devicebroker": {
+        "getDevice": [
+          {
+            "path": "/vnms/cloud/systems/${uuid}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "uuid": "uuid"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "applianceName": "name",
+              "name": "{orgName % : % name}",
+              "ostype": "type",
+              "ostypePrefix": "versa-",
+              "ipaddress": "ip-address",
+              "port": "orgName"
+            }
+          }
+        ],
+        "getDevicesFiltered": [
+          {
+            "path": "/vnms/appliance/summary",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {
+              "applianceName": "name",
+              "name": "{orgName % : % name}",
+              "ostype": "type",
+              "ostypePrefix": "versa-",
+              "ipaddress": "ip-address",
+              "port": "orgName"
+            }
+          }
+        ],
+        "isAlive": [
+          {
+            "path": "/vnms/dashboard/appliance/${uuid}/syncStatus",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "uuid": "uuid"
+            },
+            "responseDatakey": "",
+            "responseFields": {
+              "status": "versanms.ApplianceStatus.unreachable",
+              "statusValue": "false"
+            }
+          }
+        ],
+        "getConfig": [
+          {
+            "path": "/vnms/cloud/systems/${uuid}",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {
+              "uuid": "uuid"
+            },
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ],
+        "getCount": [
+          {
+            "path": "/get/devices",
+            "method": "GET",
+            "query": {},
+            "body": {},
+            "headers": {},
+            "handleFailure": "ignore",
+            "requestFields": {},
+            "responseDatakey": "",
+            "responseFields": {}
+          }
+        ]
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 120000
+  },
+  "@itentialopensource/adapter-webex_teams": {
+    "id": "webex_teams",
+    "type": "WebexTeams",
+    "properties": {
+      "host": "localhost",
+      "port": 443,
+      "base_path": "/",
+      "version": "v1",
+      "cache_location": "none",
+      "encode_pathvars": true,
+      "encode_queryvars": true,
+      "save_metric": false,
+      "stub": true,
+      "protocol": "https",
+      "authentication": {
+        "auth_method": "request_token",
+        "username": "client_id",
+        "password": "refresh_token",
+        "token": "",
+        "token_timeout": 360000,
+        "token_cache": "local",
+        "invalid_token_error": 401,
+        "auth_field": "header.headers.Authorization",
+        "auth_field_format": "Bearer {token}",
+        "auth_logging": false,
+        "client_id": "",
+        "client_secret": "",
+        "grant_type": ""
+      },
+      "healthcheck": {
+        "type": "none",
+        "frequency": 60000,
+        "query_object": {}
+      },
+      "throttle": {
+        "throttle_enabled": false,
+        "number_pronghorns": 1,
+        "sync_async": "sync",
+        "max_in_queue": 1000,
+        "concurrent_max": 1,
+        "expire_timeout": 0,
+        "avg_runtime": 200,
+        "priorities": [
+          {
+            "value": 0,
+            "percent": 100
+          }
+        ]
+      },
+      "request": {
+        "number_redirects": 0,
+        "number_retries": 3,
+        "limit_retry_error": 0,
+        "failover_codes": [],
+        "attempt_timeout": 5000,
+        "global_request": {
+          "payload": {},
+          "uriOptions": {},
+          "addlHeaders": {},
+          "authData": {}
+        },
+        "healthcheck_on_timeout": true,
+        "return_raw": false,
+        "archiving": false,
+        "return_request": false
+      },
+      "proxy": {
+        "enabled": false,
+        "host": "",
+        "port": 1,
+        "protocol": "http",
+        "username": "",
+        "password": ""
+      },
+      "ssl": {
+        "ecdhCurve": "",
+        "enabled": false,
+        "accept_invalid_cert": true,
+        "ca_file": "",
+        "key_file": "",
+        "cert_file": "",
+        "secure_protocol": "",
+        "ciphers": ""
+      },
+      "mongo": {
+        "host": "",
+        "port": 0,
+        "database": "",
+        "username": "",
+        "password": "",
+        "replSet": "",
+        "db_ssl": {
+          "enabled": false,
+          "accept_invalid_cert": false,
+          "ca_file": "",
+          "key_file": "",
+          "cert_file": ""
+        }
+      }
+    },
+    "groups": [],
+    "brokers": [],
+    "logLevel": "none",
+    "timeout": 60000
+  }
+}

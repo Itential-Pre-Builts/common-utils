@@ -1,0 +1,43 @@
+{
+  "baseUrl": "http://localhost:3232/",
+  "env": {
+    "iapUserName": "admin@pronghorn",
+    "iapPassword": "admin",
+    "logLevel": "debug",
+    "provenance": "local_aaa",
+    "assignAllRolesToUser": true,
+    "iapHealthCheckConfig": {
+      "maxRetries": 5, 
+      "waitForDelay": 10,
+      "startDelay": 180
+    }
+  },
+  "video": false,
+  "trashAssetsBeforeRuns": true,
+  "screenshotOnRunFailure" : false,
+  "downloadsFolder": "test/cypress/downloads",
+  "fixturesFolder": "test/cypress/fixtures",
+  "integrationFolder": "test/cypress/integration",
+  "pluginsFile": "test/cypress/plugins/index.js",
+  "screenshotsFolder": "test/cypress/screenshots",
+  "supportFile": "test/cypress/support/index.js",
+  "videosFolder": "test/cypress/videos",
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "reporterEnabled": [
+      "mocha-junit-reporter",
+      "cypress-mochawesome-reporter",
+      "mochawesome"
+    ],
+    "mochaJunitReporterReporterOptions": {
+      "mochaFile": "test/cypress/reports/junit/results-[hash].xml"
+    },
+    "mochawesomeReporterOptions": {
+      "charts": false,
+      "html": true,
+      "json": false,
+      "reportDir": "test/cypress/reports/mochawesome",
+      "reportFilename": "report"
+    }
+  }
+}

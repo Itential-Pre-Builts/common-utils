@@ -1,0 +1,73 @@
+# {{ projectREADME.name }}
+
+## Overview
+
+{{ projectREADME.overview }}
+
+{% if projectREADME.type == "Transformation Project"%}
+## Transformations
+{% elif projectREADME.type == "Example Project"%}
+## Example Workflows
+{% else %}
+## Workflows
+{% endif %}
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Overview</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for asset in assetREADMEs %}    <tr>
+      <td><a href='{{asset.href}}' target='_blank'>{{ asset.name }}</a></td>
+      <td>{{ asset.overview }}</td>
+    </tr>{% endfor %}
+  </tbody>
+</table>
+
+{% if externalDependencyList is defined and externalDependencyList %}
+## External Dependencies
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>OS Version</th>
+      <th>API Version</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for dependency in externalDependencyList %}    <tr>
+      <td>{{dependency.name}}</td>
+      <td>{{dependency.osVersion}}</td>
+      <td>{{dependency.apiVersion}}</td>
+    </tr>{% endfor %}
+  </tbody>
+</table>{% else %}
+## External Dependencies
+
+No external dependencies required to run this {{ projectREADME.type }}.{% endif %}
+{% if adapters is defined and adapters %}
+## Adapters
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Version</th>
+      <th>Configuration Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for adapter in adapters %}    <tr>
+{% if 'repoLink' in adapter and adapter.repoLink != '' %}      <td><a href="{{adapter.repoLink}}">{{adapter.name}}</a></td>{% else %}      <td>{{adapter.name}}</td>{% endif %}
+      <td>{{adapter.version}}</td>
+      <td>{{adapter.configurationNotes}}</td>
+    </tr>{% endfor %}
+  </tbody>
+</table>{% else %}
+## Adapters
+
+No adapters required to run this {{ projectREADME.type }}.{% endif %}

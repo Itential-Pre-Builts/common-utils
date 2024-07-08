@@ -1,0 +1,477 @@
+{
+  "$id": "assetDocumentation",
+  "type": "object",
+  "description": "Schema for asset documentation files",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "required": [
+    "name",
+    "overview",
+    "assetType",
+    "capabilities",
+    "entryPoint",
+    "iapVersions"
+  ],
+  "properties": {
+    "iapVersions": {
+      "type": "array",
+      "description": "The IAP versions this asset has been tested against and is available for",
+      "items": {
+        "type": "string",
+        "description": "Major release of IAP version",
+        "enum": [
+          "2023.2",
+          "2023.1",
+          "2022.1",
+          "2021.2",
+          "master"
+        ]
+      }
+    },
+    "exampleProjects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/projectAdapterIntegration"
+      }
+    },
+    "adapters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/projectAdapterIntegration"
+      }
+    },
+    "integrations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/projectAdapterIntegration"
+      }
+    },
+    "transformationProjects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/projectAdapterIntegration"
+      }
+    },
+    "workflowProjects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/projectAdapterIntegration"
+      }
+    },
+    "ecosystemApplications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ecosystemApplication"
+      }
+    },
+    "externalDependencyList": {
+      "type": "array",
+      "description": "List of external dependencies required for this asset",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of external dependency",
+            "examples": [
+              "GitLab"
+            ]
+          },
+          "apiVersion": {
+            "type": "string",
+            "description": "API version of external dependency if relevant",
+            "examples": [
+              "4"
+            ]
+          },
+          "osVersion": {
+            "type": "string",
+            "description": "OS version of external dependency if relevant",
+            "examples": [
+              "v4"
+            ]
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "description": "List of capabilities of this asset",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capability": {
+            "type": "string",
+            "description": "A capability of this asset",
+            "examples": [
+              "Test capability"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    "entryPoint": {
+      "type": "object",
+      "description": "Information regarding entry point of this asset",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of entry point IAP component",
+          "examples": [
+            "test"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of entry point",
+          "enum": [
+            "Workflow",
+            "Transformation",
+            "Operations Manager Automation"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "inputs": {
+      "type": "array",
+      "description": "Inputs required to run this asset",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the input",
+            "examples": [
+              "name"
+            ]
+          },
+          "type": {
+            "type": ["string", "array"],
+            "description": "Type of the input"
+          },
+          "required": {
+            "type": "string",
+            "description": "Yes if this is required for running asset or no if not required",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the input"
+          },
+          "exampleValue": {
+            "type": "string",
+            "description": "Example value of the input"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "description": "Inputs required to run this asset",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the output",
+            "examples": [
+              "name"
+            ]
+          },
+          "type": {
+            "type": ["string", "array"],
+            "description": "Type of the output"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the output"
+          },
+          "exampleValue": {
+            "type": "string",
+            "description": "Example value of the output"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "exampleInputsAndOutputs": {
+      "description": "List of example inputs and corresponding outputs for this asset",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "exampleInput": {
+            "type": "string",
+            "description": "Example set of inputs for asset"
+          },
+          "exampleOutput": {
+            "type": "string",
+            "description": "Example set of outputs for asset"
+          }
+        },
+        "required": []
+      }
+    },
+    "queryOutput": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "array",
+          "description": "List of queries to get success values of asset",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of succuessful value that can be queried"
+              },
+              "value": {
+                "type": "string",
+                "description": "Query to use to get successful value"
+              }
+            },
+            "required": [
+              "name",
+              "value"
+            ]
+          }
+        },
+        "failure": {
+          "type": "array",
+          "description": "List of queries to get failure values of asset",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of failure value that can be queried"
+              },
+              "value": {
+                "type": "string",
+                "description": "Query to use to get failure value"
+              }
+            },
+            "required": [
+              "name",
+              "value"
+            ]
+          }
+        }
+      },
+      "required": []
+    },
+    "apiLinks": {
+      "type": "array",
+      "description": "Links to API documentation used in this Project",
+      "default": [],
+      "items": {
+        "type": "object",
+        "description": "Information about link to vendor API documentation",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Display title for the link",
+            "default": "",
+            "examples": [
+              "<Verb> <Noun>"
+            ]
+          },
+          "link": {
+            "type": "string",
+            "description": "Link to the vendor API documentation",
+            "default": "",
+            "examples": [
+              "<link>"
+            ]
+          },
+          "public": {
+            "type": "boolean",
+            "description": "Whether the link is publicly available",
+            "default": true
+          }
+        },
+        "required": [
+          "title",
+          "link"
+        ]
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of asset",
+      "examples": [
+        "Test Metadata - Itential - IAP"
+      ]
+    },
+    "overview": {
+      "type": "string",
+      "description": "Overview of asset",
+      "examples": [
+        "test of metadata"
+      ]
+    },
+    "webName": {
+      "type": "string",
+      "description": "Name of asset that can be used on itential.com"
+    },
+    "assetType": {
+      "type": "string",
+      "description": "Type of asset",
+      "enum": [
+        "Workflow",
+        "Transformation",
+        "Operations Manager Automation"
+      ]
+    }
+  },
+  "definitions": {
+    "projectAdapterIntegration": {
+      "type": "object",
+      "properties": {
+        "isDependency": {
+          "type": "boolean",
+          "description": "Whether or not this Project or Adapter or Integration is required for this asset",
+          "examples": [
+            true,
+            false
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of Project or Adapter or Integration repository in GitLab",
+          "examples": [
+            "Test Project - IAP - REST"
+          ]
+        },
+        "overview": {
+          "type": "string",
+          "description": "Description of the Project or Adapter or Integration",
+          "examples": [
+            "Project description"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the Project or Adapter or Integration",
+          "examples": [
+            "1.2.3"
+          ]
+        },
+        "webName": {
+          "type": "string",
+          "description": "Name of Project or Adapter or Integration used for itential.com website",
+          "examples": [
+            "Project"
+          ]
+        },
+        "repoLink": {
+          "type": "string",
+          "description": "Link to Project or Adapter or Integration repository on GitLab",
+          "examples": [
+            "Project Repo Link"
+          ]
+        },
+        "docLink": {
+          "type": "string",
+          "description": "Link to Project or Adapter or Integration on Itential Docs Site",
+          "examples": [
+            "test"
+          ]
+        },
+        "webLink": {
+          "type": "string",
+          "description": "Link to Project or Adapter or Integration on itential.com",
+          "examples": [
+            "test"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "webName",
+        "isDependency"
+      ]
+    },
+    "ecosystemApplication": {
+      "type": "object",
+      "properties": {
+        "isDependency": {
+          "type": "boolean",
+          "description": "Whether or not this Ecosystem Application is required for this Project",
+          "examples": [
+            true,
+            false
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of Ecosystem Application",
+          "examples": [
+            "Test Project - IAP - REST"
+          ]
+        },
+        "overview": {
+          "type": "string",
+          "description": "Description of the project",
+          "examples": [
+            "Project description"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the Ecosystem Application",
+          "examples": [
+            "1.2.3"
+          ]
+        },
+        "webName": {
+          "type": "string",
+          "description": "Name of Ecosystem Application used for itential.com website",
+          "examples": [
+            "Project"
+          ]
+        },
+        "storeLink": {
+          "type": "string",
+          "description": "Link to store where Ecosystem Application can be viewed or downloaded",
+          "examples": [
+            "www.itential.com"
+          ]
+        },
+        "docLink": {
+          "type": "string",
+          "description": "Link to Ecosystem Application on Itential Docs Site",
+          "examples": [
+            "test"
+          ]
+        },
+        "webLink": {
+          "type": "string",
+          "description": "Link to Ecosystem Application on itential.com",
+          "examples": [
+            "test"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "isDependency"
+      ]
+    }
+  }
+}

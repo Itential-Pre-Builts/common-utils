@@ -1,0 +1,291 @@
+# {{name}}
+
+## Table of Contents
+
+- [{{name}}](#{{name | replace(" ", "-") | lower}})
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Getting Started](#getting-started)
+    - [Supported IAP Versions](#supported-iap-versions)
+    - [External Dependencies](#external-dependencies)
+    - [Adapters](#adapters)
+    - [How to Install](#how-to-install)
+    - [Testing](#testing)
+  - [Using this {{ type }}](#using-this-{{type| replace(" ", "-") | lower}})
+    - [Entry Point IAP Component](#entry-point-iap-component)
+    - [Inputs](#inputs)
+    - [Outputs](#outputs)
+    - [Query Output](#query-output)
+    - [Example Inputs and Outputs](#example-inputs-and-outputs)
+    - [API Links](#api-links)
+  - [Support](#support)
+
+## Overview
+
+{{overview}}
+
+Capabilities include:
+{% for item in capabilities %}- {{item.capability}}
+{% endfor %}
+
+{% if dependencyConfigurations is defined and dependencyConfigurations %}
+### Configuring Dependencies
+  {% for item in dependencyConfigurations %}
+#### {{item.dependency}}
+
+{{item.configuration}}
+  {% endfor %}
+{% endif %}
+
+{% for item in additionalOverviewDetails %}
+### {{item.title}}
+
+{{item.detail}}
+{% endfor %}
+## Getting Started
+
+### Supported IAP Versions
+
+Itential {{type}}s are built and tested on particular versions of IAP. In addition, {{type}}s are often dependent on external systems and as such, these {{type}}s will have dependencies on these other systems. This version of **{{name}}** has been tested with:
+
+{% for iapVersion in iapVersions %}
+- IAP **{{iapVersion}}**
+{% endfor %}
+
+{% if externalDependencyList is defined and externalDependencyList %}
+### External Dependencies
+
+This version of **{{name}}** has been tested with:
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>OS Version</th>
+      <th>API Version</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for dependency in externalDependencyList %}    <tr>
+      <td>{{dependency.name}}</td>
+      <td>{{dependency.osVersion}}</td>
+      <td>{{dependency.apiVersion}}</td>
+    </tr>{% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+### External Dependencies
+
+No external dependencies required to run this {{type}}.
+{% endif %}
+
+{% if adapters is defined and adapters %}
+### Adapters
+
+This version of **{{name}}** has been tested with:
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Version</th>
+      <th>Configuration Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for adapter in adapters %}    <tr>
+{% if 'repoLink' in adapter and adapter.repoLink != '' %}      <td><a href="{{adapter.repoLink}}">{{adapter.name}}</a></td>{% else %}      <td>{{adapter.name}}</td>{% endif %}
+      <td>{{adapter.version}}</td>
+      <td>{{adapter.configurationNotes}}</td>
+    </tr>{% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+
+### Adapters
+
+No adapters required to run **{{name}}**.
+{% endif %}
+
+### How to Install
+{% if bundleType == "pre-built" %}
+To install the {{type}}:
+
+- Verify you are running a supported version of the Itential Automation Platform (IAP) as listed above in the [Supported IAP Versions](#supported-iap-versions) section in order to install the {{type}}.
+- Import the {{type}} in [Admin Essentials](https://docs.itential.com/docs/importing-a-prebuilt-4).
+{% else %}
+To install the {{type}}:
+
+- Verify you are running a supported version of the Itential Automation Platform (IAP) as listed above in the [Supported IAP Versions](#supported-iap-versions) section in order to install the {{type}}.
+- Import the {{type}} in Projects or from the [Project file]({{projectFileLink}}) {% if entryPoint.type == "Operations Manager Automation" %}
+- Import the Operations Manager Automation [{{entryPoint.name}}]({{operationsManagerLink}}){% endif %}
+{% endif %}
+### Testing
+
+While Itential tests this {{type}} and its capabilities, it is often the case the customer environments offer their own unique circumstances. Therefore, it is our recommendation that you deploy this {{type}} into a development/testing environment in which you can test the {{type}}.
+
+## Using this {{type}}
+{% if configurationInstructions is defined and configurationInstructions != "" %}
+### {{type}} Configuration
+
+{{configurationInstructions}}{% endif %}
+
+### Entry Point IAP Component
+
+The primary IAP component to run **{{name}}** is listed below:
+
+<table>
+  <thead>
+    <tr>
+      <th>IAP Component Name</th>
+      <th>IAP Component Type</th>
+    </tr>
+  </thead>
+  <tbody>
+      <td>{{entryPoint.name}}</td>
+      <td>{{entryPoint.type}}</td>
+    </tr>
+  </tbody>
+</table>
+
+### Inputs
+{% if inputs %}
+The following table lists the inputs for **{{name}}**:
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required</th>
+      <th>Description</th>
+      <th>Example Value</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for input in inputs %}    <tr>
+      <td>{{input.name}}</td>
+      <td>{{input.type}}</td>
+      <td>{{input.required}}</td>
+      <td>{{input.description}}</td>
+      <td><pre lang="json">{{input.exampleValue}}</pre></td>
+    </tr>{% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+There are no inputs for **{{name}}**.
+{% endif %}
+
+### Outputs
+{% if outputs %}
+The following table lists the outputs for **{{name}}**:
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Example Value</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for output in outputs %}    <tr>
+      <td>{{output.name}}</td>
+      <td>{{output.type}}</td>
+      <td>{{output.description}}</td>
+      <td><pre lang="json">{{output.exampleValue}}</pre></td>
+    </tr>{% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+There are no outputs for **{{name}}**.
+{% endif %}
+
+### Query Output
+{% if queryOutput %}
+
+  {% if queryOutput.success %}
+
+The following items show how to query successful results from the output of **{{name}}**:
+
+    {% for object in queryOutput.success %}
+#### {{object.name}}
+
+`{{object.value}}`
+
+    {% endfor %}
+  {% else %}
+
+No object to query upon success
+
+  {% endif %}
+  {% if queryOutput.failure %}
+The following items show how to query failure results from the output of **{{name}}**:
+
+    {% for object in queryOutput.failure %}
+#### {{object.name}}
+
+`{{object.value}}`
+
+    {% endfor %}
+  {% endif %}
+{% else %}
+There are no query output examples for **{{name}}**.
+{% endif %}
+
+
+{% if exampleInputsAndOutputs %}
+### Example Inputs and Outputs
+
+  {% for exampleInputAndOutput in exampleInputsAndOutputs %}
+#### Example {{ loop.index }}
+
+    {% if exampleInputAndOutput.exampleInput %}
+Input:
+<pre>{{exampleInputAndOutput.exampleInput}} </pre>
+
+    {% endif %}
+    {% if exampleInputAndOutput.exampleOutput %}
+Output:
+<pre>{{exampleInputAndOutput.exampleOutput}} </pre>
+
+    {% endif %}
+  {% endfor %}
+{% else %}
+### Example Inputs and Outputs
+
+No example inputs or outputs found.
+
+{% endif %}
+
+### API Links
+{% if assetType == 'Transformation' %}As noted on the JSON Schema Transformation (JST) Designer documentation for [Using a Method](https://docs.itential.com/docs/jst-designer-2023-1#using-a-method), select the information `(i)` icon in the header of the method to be redirected to the [Mozilla Developer Network JavaScript reference documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference) for the method. {% endif %}
+{% if apiLinks %}
+<table>
+  <thead>
+    <tr>
+      <th>API Name</th>
+      <th>API Documentation Link</th>
+      <th>API Link Visibility</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for apiLink in apiLinks %}    <tr>
+      <td>{{apiLink.title}}</td>
+{% if 'public' in apiLink and apiLink.public == false %}      <td>{{apiLink.link}}</td>{% else %}      <td><a href="{{apiLink.link}}">{{apiLink.link}}</a></td>{% endif %}
+{% if 'public' in apiLink and apiLink.public == false %}      <td>Private</td>{% else %}      <td>Public</td>{% endif %}
+    </tr>{% endfor %}
+  </tbody>
+</table>
+{% elif assetType != 'Transformation' %}
+No API Links provided.
+{% endif %}
+
+## Support
+
+Please use your Itential Customer Success account if you need support when using **{{name}}**.

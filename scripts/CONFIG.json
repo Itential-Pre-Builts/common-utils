@@ -1,0 +1,47 @@
+{
+    "adapterProps": {
+        "adapters": [
+            {
+                "id": "mongo",
+                "type": "DBMongo",
+                "brokers": [],
+                "properties": {
+                    "db": "itential",
+                    "host": "mongodb",
+                    "port": 27017,
+                    "credentials": {
+                        "dbAuth": false
+                    }
+                }
+            },
+            {
+                "id": "local_aaa",
+                "type": "local_aaa",
+                "properties": {
+                    "database": {
+                        "url": "mongodb://mongodb:27017",
+                        "db": "LocalAAA",
+                        "credentials": {
+                            "dbAuth": false
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "mongoProps": {
+        "credentials": {
+            "dbAuth": false
+        },
+        "ssl": {
+            "enabled": false
+        },
+        "db": "itential",
+        "url": "mongodb://mongodb:27017"
+    },
+    "redisProps": {
+        "host": "redis",
+        "port": 6379,
+        "db": 0
+    }
+}
