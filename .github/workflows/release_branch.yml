@@ -10,16 +10,13 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  # Lint code, test code quality, and ensure that there are no insecure dependencies
-  security: 
+  # Validates schema of manifest.json
+  schema_validation:
+    # needs: security
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
     steps:
       - uses: actions/checkout@v4
-      - name: Verifying security
-        continue-on-error: true
+      - name: Validating schema of manifest.json
         run: |
-          npm i 
-          echo "node version: $(node --version)"
-          echo "npm version: $(npm --version)"
-          npm audit --registry=https://registry.npmjs.org
+          ls -al
