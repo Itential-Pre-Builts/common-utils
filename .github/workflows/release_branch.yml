@@ -27,7 +27,8 @@ jobs:
           chmod +x node_setup.sh
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/.test_file
           chmod +x .test_file
-          cat ./.test_file
+          envsubst < .test_file > .test_file_new
+          cat ./.test_file_new
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
           chmod +x manifest-schema.json
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
