@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# running git config
+# Set-Up git config
 echo "Started setting git config"
 git config --global user.email "github-action@users.noreply.github.com"
 git config --global user.name "$GITHUB_ACTOR"
@@ -37,7 +37,7 @@ if [ -f test/manifestLinkTester.js ]; then
   git add test/manifestLinkTester.js
 fi
 
-# add all files to be commited
+# Add all files to be commited
 echo "Started git add of files files"
 git add test/cypress/integration
 git add test/cypress/plugins/index.js
@@ -57,13 +57,14 @@ else
   echo "Skipping git add of documentation"
 fi
 
-#  commit files
+# commit files
 echo "Started commit of files"
 git commit -m "Updating package, artifact, and cypress [skip ci]"
 NEW_VERSION=$(node -p "require('./artifact.json').metadata.version")
 git tag -a v"$NEW_VERSION" -m "Bumping versions for package and artifact"
 
-#  push files and tag using access token
+# Push files and tag using access token
+echo "Started push of files"
 git remote set-url origin https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY"
 if git push -f HEAD:"$CI_COMMIT_BRANCH" --follow-tags --no-verify; then
   echo "Push files successfully"
