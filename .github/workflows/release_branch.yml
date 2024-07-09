@@ -23,8 +23,7 @@ jobs:
   #         TEST_VALUE: ${{ secrets.TEST_VALUE }}
   #       run: |
   #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-  #         chmod +x node_setup.sh
-  #         sh ./node_setup.sh
+  #         bash ./node_setup.sh
   #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
   #         chmod +x manifest-schema.json
   #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
@@ -44,8 +43,7 @@ jobs:
   #         TEST_VALUE: ${{ secrets.TEST_VALUE }}
   #       run: |
   #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-  #         chmod +x node_setup.sh
-  #         sh ./node_setup.sh
+  #         bash ./node_setup.sh
   #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestLinkTester.js
   #         chmod +x manifestLinkTester.js
   #         node manifestLinkTester.js manifest.json
@@ -64,8 +62,7 @@ jobs:
   #     # Runs generate readme scripts for asset readmes
   #       run: |
   #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-  #         chmod +x node_setup.sh
-  #         sh ./node_setup.sh
+  #         bash ./node_setup.sh
   #         if [ -e "documentation/documentation_mapping.json" ]; then
   #           mkdir -p readmeUtils
   #           wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/validateDocumentation.js
@@ -116,10 +113,9 @@ jobs:
             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_metadata.py
             wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/documentation-pipeline-tool.js
             wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/projectTypeTemplates/project-templates.md
-            chmod +x readmeUtils/*
             chmod +x tabUtils/documentation-pipeline-tool.js
             echo "Running readme generation..."
-            ./readmeUtils/generate_readme.sh
+            bash ./readmeUtils/generate_readme.sh
             echo "Running TAB1 and TAB2 generation... -p $GITHUB_REPOSITORY -u $GITHUB_SERVER_URL "
             node ./tabUtils/documentation-pipeline-tool.js -p "$GITHUB_REPOSITORY" -u "$GITHUB_SERVER_URL"
           else
