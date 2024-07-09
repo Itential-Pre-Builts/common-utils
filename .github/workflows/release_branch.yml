@@ -156,17 +156,20 @@ jobs:
 
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
-          # # Bumps node version without creating commiting new tag repo. Adds IAP version tagging if branch is Master or release.
-          # # This conditional is seperated into two parts instead of one script because of current errors in ci/cd regex
-          # if [[ "$GITHUB_HEAD_REF" =~ release/ || "$GITHUB_REF_NAME" =~ release/ ]]; then
-          #   wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/version_bump_release.sh
-          #   chmod +x version_bump_release.sh
-          #   ./version_bump_release.sh $GENERATE_READMES
-          # else
-          #   wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/version_bump_master.sh
-          #   chmod +x version_bump_master.sh
-          #   ./version_bump_master.sh $GENERATE_READMES
-          # fi
-          # wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/generate.js
-          # chmod +x generate.js
-          # node generate "$GITHUB_RUN_ID" "$GITHUB_REPOSITORY" "$GITHUB_REF"
+          # Bumps node version without creating commiting new tag repo. Adds IAP version tagging if branch is Master or release.
+          # This conditional is seperated into two parts instead of one script because of current errors in ci/cd regex
+          if [[ "$GITHUB_HEAD_REF" =~ release/ || "$GITHUB_REF_NAME" =~ release/ ]]; then
+            echo "Running version_bump_release"
+            wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/version_bump_release.sh
+            chmod +x version_bump_release.sh
+            ./version_bump_release.sh $GENERATE_READMES
+          else
+            echo "Running version_bump_master"
+            wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/version_bump_master.sh
+            chmod +x version_bump_master.sh
+            ./version_bump_master.sh $GENERATE_READMES
+          fi
+          echo "Running generate"
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/generate.js
+          chmod +x generate.js
+          node generate "$GITHUB_RUN_ID" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_REF_NAME"
