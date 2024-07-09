@@ -95,8 +95,6 @@ jobs:
           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
           GENERATE_READMES: ${{ vars.GENERATE_READMES }}
-          GITHUB_SERVER_URL: ${{ GITHUB_SERVER_URL }}
-          GITHUB_REPOSITORY: ${{ GITHUB_REPOSITORY }}
         # Runs generate readme scripts for asset readmes
         run: |
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
@@ -117,6 +115,7 @@ jobs:
             chmod +x tabUtils/documentation-pipeline-tool.js
             echo "Running readme generation"
             bash ./readmeUtils/generate_readme.sh
+            echo 'GITHUB_SERVER_URL: $GITHUB_SERVER_URL, GITHUB_REPOSITORY: $GITHUB_REPOSITORY'
             echo 'Running TAB1 and TAB2 generation... -p "." -u "${GITHUB_SERVER_URL}"/"${GITHUB_REPOSITORY}" '
             node ./tabUtils/documentation-pipeline-tool.js -p "." -u "${GITHUB_SERVER_URL}"/"${GITHUB_REPOSITORY}"
           else
