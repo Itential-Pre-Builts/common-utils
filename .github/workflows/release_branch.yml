@@ -99,7 +99,6 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
-          ls -al
           if [ -e "documentation/documentation_mapping.json" ]; then
             mkdir -p readmeUtils
             mkdir -p tabUtils
@@ -114,10 +113,10 @@ jobs:
             wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/documentation-pipeline-tool.js
             wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/projectTypeTemplates/project-templates.md
             chmod +x tabUtils/documentation-pipeline-tool.js
-            echo "Running readme generation..."
+            echo "Running readme generation"
             bash ./readmeUtils/generate_readme.sh
-            echo "Running TAB1 and TAB2 generation... -p $GITHUB_REPOSITORY -u $GITHUB_SERVER_URL "
-            node ./tabUtils/documentation-pipeline-tool.js -p "$GITHUB_REPOSITORY" -u "$GITHUB_SERVER_URL"
+            # echo "Running TAB1 and TAB2 generation... -p $GITHUB_REPOSITORY -u $GITHUB_SERVER_URL "
+            # node ./tabUtils/documentation-pipeline-tool.js -p "$GITHUB_REPOSITORY" -u "$GITHUB_SERVER_URL"
           else
             echo "Skipping readme generation. Adding required documentation will remove this error."
             echo "Exiting job with a warning"
