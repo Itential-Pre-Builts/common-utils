@@ -115,13 +115,10 @@ jobs:
             chmod +x tabUtils/documentation-pipeline-tool.js
             echo "Running readme generation"
             bash ./readmeUtils/generate_readme.sh
-            echo "GITHUB_ACTION = $GITHUB_ACTION"
-            echo "GITHUB_ACTION_PATH = $GITHUB_ACTION_PATH"
-            echo "GITHUB_ACTION_REPOSITORY = $GITHUB_ACTION_REPOSITORY"
             echo "GITHUB_SERVER_URL = $GITHUB_SERVER_URL"
             echo "GITHUB_REPOSITORY = $GITHUB_REPOSITORY"
-            echo 'Running TAB1 and TAB2 generation... -p "." -u "${GITHUB_SERVER_URL}"/"${GITHUB_REPOSITORY}" '
-            node ./tabUtils/documentation-pipeline-tool.js -p "." -u "${GITHUB_SERVER_URL}"/"${GITHUB_REPOSITORY}"
+            echo "Running TAB1 and TAB2 generation... -p '.' -u $GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+            node ./tabUtils/documentation-pipeline-tool.js -p "." -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
           else
             echo "Skipping readme generation. Adding required documentation will remove this error."
             echo "Exiting job with a warning"
