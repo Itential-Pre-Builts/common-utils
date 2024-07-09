@@ -190,8 +190,8 @@ jobs:
 # Bumps the version of package/package-lock and generates a new artifact.json
   commit_all_artifacts:
     runs-on: ubuntu-latest
-    # needs:
-    #   - generate_readme_metadata
+    needs:
+      - version_bump
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
     env:
       NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
@@ -201,7 +201,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
-      - name: Bumps Pre-Built version and generates new artifact.json
+      - name: Commits all generated files to repository
         run: |
           ls -al
           git status
