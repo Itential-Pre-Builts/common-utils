@@ -87,7 +87,6 @@ json -I -f package.json -e "this.version='$NEW_VERSION_FOR_TAG'"
 npm ci
 
 # create release note before versioning the project
-wget https://gitlab.com/itentialopensource/pre-built-automations/common-utils/-/raw/master/scripts/create_release_script.sh
-chmod +x create_release_script.sh
-sh ./create_release_script.sh "$NEW_VERSION_FOR_TAG" "$IS_MARKDOWN_GENERATION"
+wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/create_release_script.sh
+bash ./create_release_script.sh "$NEW_VERSION_FOR_TAG" "$IS_MARKDOWN_GENERATION"
 

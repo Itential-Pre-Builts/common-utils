@@ -40,7 +40,6 @@ NEW_VERSION=$(node -p "require('./package.json').version")
 echo "New version: $NEW_VERSION"
 
 # create release note before versioning the project
-wget https://gitlab.com/itentialopensource/pre-built-automations/common-utils/-/raw/master/scripts/create_release_script.sh
-chmod +x create_release_script.sh
-sh ./create_release_script.sh "$NEW_VERSION" "$IS_MARKDOWN_GENERATION"
+wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/create_release_script.sh
+bash ./create_release_script.sh "$NEW_VERSION" "$IS_MARKDOWN_GENERATION"
 

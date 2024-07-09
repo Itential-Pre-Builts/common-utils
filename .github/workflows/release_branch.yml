@@ -153,7 +153,7 @@ jobs:
           echo "GITHUB_REF: $GITHUB_REF"
           echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
           echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
-
+          ls -al
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
           # Bumps node version without creating commiting new tag repo. Adds IAP version tagging if branch is Master or release.
@@ -173,3 +173,14 @@ jobs:
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/generate.js
           chmod +x generate.js
           node generate "$GITHUB_RUN_ID" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_REF_NAME"
+          ls -al
+          git status
+      - name: Upload generated artifact.json, changelog, and package files
+        uses: actions/upload-artifact@v4
+        with:
+          name: version_bump_artifacts
+          path: |
+            artifact.json
+            CHANGELOG.md
+            package.json
+            package-lock.json
