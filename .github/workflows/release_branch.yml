@@ -101,8 +101,7 @@ jobs:
         # Runs generate readme scripts for asset readmes
         run: |
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-          chmod +x node_setup.sh
-          sh ./node_setup.sh
+          bash ./node_setup.sh
           ls -al
           if [ -e "documentation/documentation_mapping.json" ]; then
             mkdir -p readmeUtils
