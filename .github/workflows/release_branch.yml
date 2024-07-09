@@ -95,6 +95,8 @@ jobs:
           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
           GENERATE_READMES: ${{ vars.GENERATE_READMES }}
+          GITHUB_SERVER_URL: ${{ GITHUB_SERVER_URL }}
+          GITHUB_REPOSITORY: ${{ GITHUB_REPOSITORY }}
         # Runs generate readme scripts for asset readmes
         run: |
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
