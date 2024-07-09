@@ -7,18 +7,18 @@ git config --global user.name "$GITHUB_ACTOR"
 
 # Move all readme_metadata_artifacts into expected location
 echo "Started move of readme_metadata_artifacts files"
-mv readme_metadata_artifacts/README.md .
-mv readme_metadata_artifacts/documentation .
-mv readme_metadata_artifacts/metadata.json .
-mv readme_metadata_artifacts/TAB1.md .
-mv readme_metadata_artifacts/TAB2.md .
+mv readme_metadata_artifacts/README.md . || echo "readme_metadata_artifacts/README.md not found"
+mv readme_metadata_artifacts/documentation . || echo "readme_metadata_artifacts/documentation not found"
+mv readme_metadata_artifacts/metadata.json . || echo "readme_metadata_artifacts/metadata.json not found"
+mv readme_metadata_artifacts/TAB1.md . || echo "readme_metadata_artifacts/TAB1.md not found"
+mv readme_metadata_artifacts/TAB2.md . || echo "readme_metadata_artifacts/TAB2.md not found"
 
 # Move all version bump artifacts into expected location
 echo "Started move of version_bump_artifacts files"
-mv version_bump_artifacts/artifact.json .
-mv version_bump_artifacts/CHANGELOG.md .
-mv version_bump_artifacts/package.json .
-mv version_bump_artifacts/package-lock.json .
+mv version_bump_artifacts/artifact.json . || echo "version_bump_artifacts/artifact.json not found"
+mv version_bump_artifacts/CHANGELOG.md . || echo "version_bump_artifacts/CHANGELOG.md not found"
+mv version_bump_artifacts/package.json . || echo "version_bump_artifacts/package.json not found"
+mv version_bump_artifacts/package-lock.json . || echo "version_bump_artifacts/package-lock.json not found"
 
 # Conditionally removes the old manifest files
 echo "Started update of manifest files"
