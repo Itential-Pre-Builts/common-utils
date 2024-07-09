@@ -17,7 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validating schema of manifest.json
-        # shell: bash
         env:
           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
@@ -50,3 +49,32 @@ jobs:
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestLinkTester.js
           chmod +x manifestLinkTester.js
           node manifestLinkTester.js manifest.json
+
+  # Confirms documentation files are valid
+  documentation_validation:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Skip CI')"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validating schema links in manifest.json
+        env:
+          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+          GENERATE_READMES: ${{ vars.GENERATE_READMES }}
+      # Runs generate readme scripts for asset readmes
+        run: |
+          if [ -e "documentation/documentation_mapping.json" ]; then
+            mkdir -p readmeUtils
+            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/validateDocumentation.js
+            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/assetDocumentationSchema.json
+            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/readmeDocumentationSchema.json
+            chmod +x readmeUtils/*
+            echo "Running documentation validation"
+            node ./readmeUtils/validateDocumentation.js
+          else
+            echo "Skipping documentation validation"
+            echo "Exiting job with a warning"
+            if [[ "${GENERATE_READMES}" == "true" ]]; then
+              exit 1
+            fi
+          fi
