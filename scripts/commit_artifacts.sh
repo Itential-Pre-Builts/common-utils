@@ -1,9 +1,27 @@
 #!/bin/bash
 
 # running git config
+echo "Started setting git config"
 git config --global user.email "github-action@users.noreply.github.com"
 git config --global user.name "$GITHUB_ACTOR"
+
+# Move all readme_metadata_artifacts into expected location
+echo "Started move of readme_metadata_artifacts files"
+mv readme_metadata_artifacts/README.md .
+mv readme_metadata_artifacts/documentation .
+mv readme_metadata_artifacts/metadata.json .
+mv readme_metadata_artifacts/TAB1.md .
+mv readme_metadata_artifacts/TAB2.md .
+
+# Move all version bump artifacts into expected location
+echo "Started move of version_bump_artifacts files"
+mv version_bump_artifacts/artifact.json .
+mv version_bump_artifacts/CHANGELOG.md .
+mv version_bump_artifacts/package.json .
+mv version_bump_artifacts/package-lock.json .
+
 # Conditionally removes the old manifest files
+echo "Started update of manifest files"
 if [ -f test/manifest-schema.json ]; then
   rm -f test/manifest-schema.json
   git add test/manifest-schema.json
@@ -20,6 +38,7 @@ if [ -f test/manifestLinkTester.js ]; then
 fi
 
 # add all files to be commited
+echo "Started git add of files files"
 git add test/cypress/integration
 git add test/cypress/plugins/index.js
 git add test/cypress/support
@@ -39,6 +58,7 @@ else
 fi
 
 #  commit files
+echo "Started commit of files"
 git commit -m "Updating package, artifact, and cypress [skip ci]"
 NEW_VERSION=$(node -p "require('./artifact.json').metadata.version")
 git tag -a v"$NEW_VERSION" -m "Bumping versions for package and artifact"
