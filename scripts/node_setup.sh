@@ -23,7 +23,7 @@ if [ ! -f package-lock.json ]; then
 else 
     echo "running npm ci"
     npm ci
-    if [[ $? -ne 0 ]]; then
+    if [ $? -ne 0 ]; then
         echo "npm ci failed."
         exit 1
     fi
