@@ -207,5 +207,5 @@ jobs:
           git status
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
-          # wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/commit_artifacts.sh
-          # bash ./commit_artifacts.sh
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/commit_artifacts.sh
+          bash ./commit_artifacts.sh
