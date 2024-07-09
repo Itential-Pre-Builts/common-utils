@@ -10,74 +10,74 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  # # Validates schema of manifest.json
-  # schema_validation:
-  #   runs-on: ubuntu-latest
-  #   if: "!contains(github.event.head_commit.message, 'Skip CI')"
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Validating schema of manifest.json
-  #       env:
-  #         NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
-  #         ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
-  #         TEST_VALUE: ${{ secrets.TEST_VALUE }}
-  #       run: |
-  #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-  #         bash ./node_setup.sh
-  #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
-  #         chmod +x manifest-schema.json
-  #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
-  #         chmod +x manifestTester.js
-  #         node manifestTester.js manifest.json manifest-schema.json
+  # Validates schema of manifest.json
+  schema_validation:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Skip CI')"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validating schema of manifest.json
+        env:
+          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+          TEST_VALUE: ${{ secrets.TEST_VALUE }}
+        run: |
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+          bash ./node_setup.sh
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
+          chmod +x manifest-schema.json
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
+          chmod +x manifestTester.js
+          node manifestTester.js manifest.json manifest-schema.json
 
-  # # Validates links in manifest.json
-  # schemaLinks_validation:
-  #   runs-on: ubuntu-latest
-  #   if: "!contains(github.event.head_commit.message, 'Skip CI')"
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Validating schema links in manifest.json
-  #       env:
-  #         NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
-  #         ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
-  #         TEST_VALUE: ${{ secrets.TEST_VALUE }}
-  #       run: |
-  #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-  #         bash ./node_setup.sh
-  #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestLinkTester.js
-  #         chmod +x manifestLinkTester.js
-  #         node manifestLinkTester.js manifest.json
+  # Validates links in manifest.json
+  schemaLinks_validation:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Skip CI')"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validating schema links in manifest.json
+        env:
+          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+          TEST_VALUE: ${{ secrets.TEST_VALUE }}
+        run: |
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+          bash ./node_setup.sh
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestLinkTester.js
+          chmod +x manifestLinkTester.js
+          node manifestLinkTester.js manifest.json
 
-  # # Confirms documentation files are valid
-  # documentation_validation:
-  #   runs-on: ubuntu-latest
-  #   if: "!contains(github.event.head_commit.message, 'Skip CI')"
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Confirms documentation files are valid
-  #       env:
-  #         NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
-  #         ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
-  #         GENERATE_READMES: ${{ vars.GENERATE_READMES }}
-  #     # Runs generate readme scripts for asset readmes
-  #       run: |
-  #         wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-  #         bash ./node_setup.sh
-  #         if [ -e "documentation/documentation_mapping.json" ]; then
-  #           mkdir -p readmeUtils
-  #           wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/validateDocumentation.js
-  #           wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/assetDocumentationSchema.json
-  #           wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/readmeDocumentationSchema.json
-  #           chmod +x readmeUtils/*
-  #           echo "Running documentation validation"
-  #           node ./readmeUtils/validateDocumentation.js
-  #         else
-  #           echo "Skipping documentation validation"
-  #           echo "Exiting job with a warning"
-  #           if [[ "${GENERATE_READMES}" == "true" ]]; then
-  #             exit 1
-  #           fi
-  #         fi
+  # Confirms documentation files are valid
+  documentation_validation:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Skip CI')"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirms documentation files are valid
+        env:
+          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+          GENERATE_READMES: ${{ vars.GENERATE_READMES }}
+      # Runs generate readme scripts for asset readmes
+        run: |
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+          bash ./node_setup.sh
+          if [ -e "documentation/documentation_mapping.json" ]; then
+            mkdir -p readmeUtils
+            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/validateDocumentation.js
+            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/assetDocumentationSchema.json
+            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/readmeDocumentationSchema.json
+            chmod +x readmeUtils/*
+            echo "Running documentation validation"
+            node ./readmeUtils/validateDocumentation.js
+          else
+            echo "Skipping documentation validation"
+            echo "Exiting job with a warning"
+            if [[ "${GENERATE_READMES}" == "true" ]]; then
+              exit 1
+            fi
+          fi
 
 # Checks if documentation/documentation_mapping.json exists and runs tools
 # to generate README markdown and metadata file if so.
