@@ -12,13 +12,12 @@ jobs:
 
   # Validates schema of manifest.json
   schema_validation:
-    # needs: security
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
     steps:
       - uses: actions/checkout@v4
       - name: Validating schema of manifest.json
-        shell: bash
+        # shell: bash
         env:
           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
@@ -32,3 +31,22 @@ jobs:
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
           chmod +x manifestTester.js
           node manifestTester.js manifest.json manifest-schema.json
+
+  # Validates links in manifest.json
+  schemaLinks_validation:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Skip CI')"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validating schema links in manifest.json
+        env:
+          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+          TEST_VALUE: ${{ secrets.TEST_VALUE }}
+        run: |
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+          chmod +x node_setup.sh
+          sh ./node_setup.sh
+          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestLinkTester.js
+          chmod +x manifestLinkTester.js
+          node manifestLinkTester.js manifest.json
