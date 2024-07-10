@@ -1,0 +1,25 @@
+# Workflow run on commits to source branches in pull requests
+
+name: Reusable Source Branch Workflow
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow when called by another workflow specific to a repository
+  workflow_call:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  # Lint code, test code quality, and ensure that there are no insecure dependencies
+  security:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Skip CI')"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verifying security
+        continue-on-error: true
+        run: |
+          npm i 
+          echo "node version: $(node --version)"
+          echo "npm version: $(npm --version)"
+          npm audit --registry=https://registry.npmjs.org

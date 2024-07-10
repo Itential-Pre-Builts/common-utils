@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Read in input parameter to denote which artifact files to move for commit
+WORKFLOW_TYPE=$1
+
 # Set-Up git config
 echo "Started setting git config"
 git config --global user.email "github-action@users.noreply.github.com"
@@ -13,12 +16,20 @@ mv readme_metadata_artifacts/metadata.json .
 mv readme_metadata_artifacts/TAB1.md .
 mv readme_metadata_artifacts/TAB2.md .
 
-# Move all version bump artifacts into expected location
-echo "Started move of version_bump_artifacts files"
-mv version_bump_artifacts/artifact.json .
-mv version_bump_artifacts/CHANGELOG.md .
-mv version_bump_artifacts/package.json .
-mv version_bump_artifacts/package-lock.json .
+if [ "$WORKFLOW_TYPE" = "release_branch_primary" ]; then
+  # Move all version bump and generate artifacts into expected location
+  echo "Started move of version_bump_artifacts files"
+  mv version_bump_artifacts/artifact.json .
+  mv version_bump_artifacts/CHANGELOG.md .
+  mv version_bump_artifacts/package.json .
+  mv version_bump_artifacts/package-lock.json .
+fi
+
+if [ "$WORKFLOW_TYPE" = "release_branch_secondary" ]; then
+  # Move all generate artifacts into expected location
+  echo "Started move of generate_artifacts files"
+  mv generate_artifacts/artifact.json .
+fi
 
 # Conditionally removes the old manifest files
 echo "Started update of manifest files"
@@ -73,13 +84,15 @@ else
   exit 1
 fi
 
-# if [ "${CI_PROJECT_NAMESPACE}"	== "itentialopensource/pre-built-automations" ]; then
-#   if npm publish --registry=https://registry.npmjs.org --access=public; then
-#     echo "Project published to npmjs.com successfully."
-#   else
-#     echo "Project failed to publish to npmjs.com."
-#     exit 1
-#   fi
-# else
-#   echo "Skipping NPM publish step."
-# fi
+# If the repository is public and GitHub is primary, do npm publish of Pre-Built
+if [ "$WORKFLOW_TYPE" = "release_branch_primary" ]; then
+  echo "Running NPM publish"
+  # if npm publish --registry=https://registry.npmjs.org --access=public; then
+  #   echo "Project published to npmjs.com successfully."
+  # else
+  #   echo "Project failed to publish to npmjs.com."
+  #   exit 1
+  # fi
+else
+  echo "Skipping NPM publish step as GitHub is secondary to GitLab"
+fi

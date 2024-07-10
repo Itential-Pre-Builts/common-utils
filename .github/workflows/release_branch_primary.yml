@@ -1,4 +1,5 @@
-# Workflow run on commits to release or main branches
+# Workflow run on commits to release or main branches when GitHub is primary and
+# GitLab is secondary
 
 name: Reusable Release Branch Workflow
 
@@ -22,8 +23,10 @@ jobs:
           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
           TEST_VALUE: ${{ secrets.TEST_VALUE }}
         run: |
+          echo "Running NodeJS setup"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
+          echo "Running schema validation of manifest.json"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
           chmod +x manifest-schema.json
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
@@ -42,8 +45,10 @@ jobs:
           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
           TEST_VALUE: ${{ secrets.TEST_VALUE }}
         run: |
+          echo "Running NodeJS setup"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
+          echo "Running schema links validation against manifest.json"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestLinkTester.js
           chmod +x manifestLinkTester.js
           node manifestLinkTester.js manifest.json
@@ -61,6 +66,7 @@ jobs:
           GENERATE_READMES: ${{ vars.GENERATE_READMES }}
       # Runs generate readme scripts for asset readmes
         run: |
+          echo "Running NodeJS setup"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
           if [ -e "documentation/documentation_mapping.json" ]; then
@@ -97,6 +103,7 @@ jobs:
           GENERATE_READMES: ${{ vars.GENERATE_READMES }}
         # Runs generate readme scripts for asset readmes
         run: |
+          echo "Running NodeJS setup"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
           if [ -e "documentation/documentation_mapping.json" ]; then
@@ -113,13 +120,13 @@ jobs:
             wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/documentation-pipeline-tool.js
             wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/projectTypeTemplates/project-templates.md
             chmod +x tabUtils/documentation-pipeline-tool.js
-            echo "Running readme generation"
+            echo "Running README generation"
             bash ./readmeUtils/generate_readme.sh
             echo "GENERATE_READMES: $GENERATE_READMES"
-            echo "Running TAB1 and TAB2 generation... -p '.' -u $GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+            echo "Running TAB1 and TAB2 generation"
             node ./tabUtils/documentation-pipeline-tool.js -p "." -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
           else
-            echo "Skipping readme generation. Adding required documentation will remove this error."
+            echo "Skipping README generation due to documentation/documetation_mapping.json file not found. Adding required documentation will resolve this issue."
             if [[ "$GENERATE_READMES" == "true" ]]; then
               exit 1
             fi
@@ -149,6 +156,7 @@ jobs:
           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
           GENERATE_READMES: ${{ vars.GENERATE_READMES }}
         run: |
+          echo "Running NodeJS setup"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
           # Bumps node version without creating commiting new tag repo. Adds IAP version tagging if branch is Master or release.
@@ -164,14 +172,14 @@ jobs:
             chmod +x version_bump_master.sh
             ./version_bump_master.sh $GENERATE_READMES
           fi
-          echo "Running generate"
+          echo "Running artifact.json generation"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/generate.js
           chmod +x generate.js
           node generate "$GITHUB_RUN_ID" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_REF_NAME"
       - name: Upload generated artifact.json, changelog, and package files
         uses: actions/upload-artifact@v4
         with:
-          name: version_bump_artifacts
+          name: version_bump_and_generate_artifacts
           path: |
             artifact.json
             CHANGELOG.md
@@ -194,8 +202,9 @@ jobs:
       - uses: actions/download-artifact@v4
       - name: Commits all generated files to repository
         run: |
-          git status
+          echo "Running NodeJS setup"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
+          echo "Running commit of artifacts"
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/commit_artifacts.sh
-          bash ./commit_artifacts.sh
+          bash ./commit_artifacts.sh "release_branch_primary"
