@@ -1,6 +1,5 @@
 #!/bin/bash
 
-ls -al
 # Set-Up git config
 echo "Started setting git config"
 git config --global user.email "github-action@users.noreply.github.com"
@@ -20,8 +19,6 @@ mv version_bump_artifacts/artifact.json . || echo "version_bump_artifacts/artifa
 mv version_bump_artifacts/CHANGELOG.md . || echo "version_bump_artifacts/CHANGELOG.md not found"
 mv version_bump_artifacts/package.json . || echo "version_bump_artifacts/package.json not found"
 mv version_bump_artifacts/package-lock.json . || echo "version_bump_artifacts/package-lock.json not found"
-
-ls -al
 
 # Conditionally removes the old manifest files
 echo "Started update of manifest files"
@@ -62,13 +59,17 @@ fi
 
 # commit files
 echo "Started commit of files"
+git status
 git commit -m "Updating package, artifact, and cypress [skip ci]"
 NEW_VERSION=$(node -p "require('./artifact.json').metadata.version")
 git tag -a v"$NEW_VERSION" -m "Bumping versions for package and artifact"
 
 # Push files and tag using access token
 echo "Started push of files"
+git remote -v
 git remote set-url origin https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY"
+echo "Updated remote"
+git remote -v
 if git push -f HEAD:"$CI_COMMIT_BRANCH" --follow-tags --no-verify; then
   echo "Push files successfully"
 else
