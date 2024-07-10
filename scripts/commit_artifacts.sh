@@ -67,10 +67,11 @@ git tag -a v"$NEW_VERSION" -m "Bumping versions for package and artifact"
 # Push files and tag using access token
 echo "Started push of files"
 git remote -v
-git remote set-url origin https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY"
-echo "Updated remote"
+echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+# git remote set-url origin https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY"
+# echo "Updated remote"
 git remote -v
-if git push -f HEAD:"$CI_COMMIT_BRANCH" --follow-tags --no-verify; then
+if git push -f HEAD:"$GITHUB_REF_NAME" --follow-tags --no-verify; then
   echo "Push files successfully"
 else
   echo "Failed to push files to remote"
