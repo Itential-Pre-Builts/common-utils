@@ -7,12 +7,6 @@ git config --global user.name "$GITHUB_ACTOR"
 
 # Move all readme_metadata_artifacts into expected location
 echo "Started move of readme_metadata_artifacts files"
-# mv readme_metadata_artifacts/README.md . || echo "readme_metadata_artifacts/README.md not found"
-# mv readme_metadata_artifacts/documentation . || echo "readme_metadata_artifacts/documentation not found"
-# mv readme_metadata_artifacts/metadata.json . || echo "readme_metadata_artifacts/metadata.json not found"
-# mv readme_metadata_artifacts/TAB1.md . || echo "readme_metadata_artifacts/TAB1.md not found"
-# mv readme_metadata_artifacts/TAB2.md . || echo "readme_metadata_artifacts/TAB2.md not found"
-
 mv readme_metadata_artifacts/README.md .
 mv readme_metadata_artifacts/documentation .
 mv readme_metadata_artifacts/metadata.json .
@@ -21,10 +15,10 @@ mv readme_metadata_artifacts/TAB2.md .
 
 # Move all version bump artifacts into expected location
 echo "Started move of version_bump_artifacts files"
-mv version_bump_artifacts/artifact.json . || echo "version_bump_artifacts/artifact.json not found"
-mv version_bump_artifacts/CHANGELOG.md . || echo "version_bump_artifacts/CHANGELOG.md not found"
-mv version_bump_artifacts/package.json . || echo "version_bump_artifacts/package.json not found"
-mv version_bump_artifacts/package-lock.json . || echo "version_bump_artifacts/package-lock.json not found"
+mv version_bump_artifacts/artifact.json .
+mv version_bump_artifacts/CHANGELOG.md .
+mv version_bump_artifacts/package.json .
+mv version_bump_artifacts/package-lock.json .
 
 # Conditionally removes the old manifest files
 echo "Started update of manifest files"
@@ -44,7 +38,7 @@ if [ -f test/manifestLinkTester.js ]; then
 fi
 
 # Add all files to be commited
-echo "Started git add of files files"
+echo "Started git add of all files"
 git add test/cypress/integration
 git add test/cypress/plugins/index.js
 git add test/cypress/support
@@ -64,13 +58,13 @@ else
 fi
 
 # commit files
-echo "Started commit of files"
+echo "Started commit of all files"
 git commit -m "Updating package, artifact, and cypress [skip ci]"
 NEW_VERSION=$(node -p "require('./artifact.json').metadata.version")
 git tag -a v"$NEW_VERSION" -m "Bumping versions for package and artifact"
 
 # Push files and tag using access token
-echo "Started push of files"
+echo "Started push of all files"
 git remote set-url origin https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY"
 if git push -f --follow-tags --no-verify; then
   echo "Push files successfully"
