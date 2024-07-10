@@ -176,7 +176,7 @@ jobs:
   commit_all_artifacts:
     runs-on: ubuntu-latest
     needs:
-      - version_bump
+      - generate_artifact
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
     env:
       NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
