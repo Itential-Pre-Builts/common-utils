@@ -203,7 +203,6 @@ jobs:
       - uses: actions/download-artifact@v4
       - name: Commits all generated files to repository
         run: |
-          ls -al
           git status
           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
           bash ./node_setup.sh
