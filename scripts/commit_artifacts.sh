@@ -68,8 +68,8 @@ git tag -a v"$NEW_VERSION" -m "Bumping versions for package and artifact"
 echo "Started push of files"
 git remote -v
 echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
-# git remote set-url origin https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY"
-# echo "Updated remote"
+git remote set-url origin https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY"
+echo "Updated remote"
 git remote -v
 if git push; then
   echo "Push files successfully"
