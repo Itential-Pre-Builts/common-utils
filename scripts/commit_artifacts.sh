@@ -7,11 +7,17 @@ git config --global user.name "$GITHUB_ACTOR"
 
 # Move all readme_metadata_artifacts into expected location
 echo "Started move of readme_metadata_artifacts files"
-mv readme_metadata_artifacts/README.md . || echo "readme_metadata_artifacts/README.md not found"
-mv readme_metadata_artifacts/documentation . || echo "readme_metadata_artifacts/documentation not found"
-mv readme_metadata_artifacts/metadata.json . || echo "readme_metadata_artifacts/metadata.json not found"
-mv readme_metadata_artifacts/TAB1.md . || echo "readme_metadata_artifacts/TAB1.md not found"
-mv readme_metadata_artifacts/TAB2.md . || echo "readme_metadata_artifacts/TAB2.md not found"
+# mv readme_metadata_artifacts/README.md . || echo "readme_metadata_artifacts/README.md not found"
+# mv readme_metadata_artifacts/documentation . || echo "readme_metadata_artifacts/documentation not found"
+# mv readme_metadata_artifacts/metadata.json . || echo "readme_metadata_artifacts/metadata.json not found"
+# mv readme_metadata_artifacts/TAB1.md . || echo "readme_metadata_artifacts/TAB1.md not found"
+# mv readme_metadata_artifacts/TAB2.md . || echo "readme_metadata_artifacts/TAB2.md not found"
+
+mv readme_metadata_artifacts/README.md .
+mv readme_metadata_artifacts/documentation .
+mv readme_metadata_artifacts/metadata.json .
+mv readme_metadata_artifacts/TAB1.md .
+mv readme_metadata_artifacts/TAB2.md .
 
 # Move all version bump artifacts into expected location
 echo "Started move of version_bump_artifacts files"
@@ -59,7 +65,6 @@ fi
 
 # commit files
 echo "Started commit of files"
-git status
 git commit -m "Updating package, artifact, and cypress [skip ci]"
 NEW_VERSION=$(node -p "require('./artifact.json').metadata.version")
 git tag -a v"$NEW_VERSION" -m "Bumping versions for package and artifact"
@@ -67,13 +72,6 @@ git tag -a v"$NEW_VERSION" -m "Bumping versions for package and artifact"
 # Push files and tag using access token
 echo "Started push of files"
 git remote set-url origin https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY"
-# if git push; then
-#   echo "Push files successfully"
-# else
-#   echo "Failed to push files to remote"
-#   exit 1
-# fi
-
 if git push -f --follow-tags --no-verify; then
   echo "Push files successfully"
 else
