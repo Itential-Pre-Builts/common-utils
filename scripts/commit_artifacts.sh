@@ -71,12 +71,19 @@ echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
 # git remote set-url origin https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY"
 # echo "Updated remote"
 git remote -v
-if git push -f --follow-tags --no-verify; then
+if git push; then
   echo "Push files successfully"
 else
   echo "Failed to push files to remote"
   exit 1
 fi
+
+# if git push -f --follow-tags --no-verify; then
+#   echo "Push files successfully"
+# else
+#   echo "Failed to push files to remote"
+#   exit 1
+# fi
 
 # if [ "${CI_PROJECT_NAMESPACE}"	== "itentialopensource/pre-built-automations" ]; then
 #   if npm publish --registry=https://registry.npmjs.org --access=public; then
