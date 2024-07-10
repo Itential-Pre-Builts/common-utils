@@ -13,7 +13,7 @@ jobs:
 
   # Validates schema of manifest.json
   schema_validation:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
     steps:
       - uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
 
   # Validates links in manifest.json
   schemaLinks_validation:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
     steps:
       - uses: actions/checkout@v4
@@ -55,7 +55,7 @@ jobs:
 
   # Confirms documentation files are valid
   documentation_validation:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
     steps:
       - uses: actions/checkout@v4
@@ -88,7 +88,7 @@ jobs:
 # Checks if documentation/documentation_mapping.json exists and runs tools
 # to generate README markdown and metadata file if so.
   generate_readme_metadata:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - documentation_validation
       - schema_validation
@@ -144,7 +144,7 @@ jobs:
 
 # Bumps the version of package/package-lock and generates a new artifact.json
   version_bump:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - generate_readme_metadata
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
@@ -188,7 +188,7 @@ jobs:
 
 # Bumps the version of package/package-lock and generates a new artifact.json
   commit_all_artifacts:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - version_bump
     if: "!contains(github.event.head_commit.message, 'Skip CI')"

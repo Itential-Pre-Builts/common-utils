@@ -11,186 +11,219 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  # Validates schema of manifest.json
-  schema_validation:
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'Skip CI')"
-    steps:
-      - uses: actions/checkout@v4
-      - name: Validating schema of manifest.json
-        env:
-          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
-          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
-          TEST_VALUE: ${{ secrets.TEST_VALUE }}
-        run: |
-          echo "Running NodeJS setup"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-          bash ./node_setup.sh
-          echo "Running schema validation of manifest.json"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
-          chmod +x manifest-schema.json
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
-          chmod +x manifestTester.js
-          node manifestTester.js manifest.json manifest-schema.json
+#   # Validates schema of manifest.json
+#   schema_validation:
+#     runs-on: ubuntu-22.04
+#     if: "!contains(github.event.head_commit.message, 'Skip CI')"
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Validating schema of manifest.json
+#         env:
+#           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+#           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+#           TEST_VALUE: ${{ secrets.TEST_VALUE }}
+#         run: |
+#           echo "Running NodeJS setup"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+#           bash ./node_setup.sh
+#           echo "Running schema validation of manifest.json"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifest-schema.json
+#           chmod +x manifest-schema.json
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestTester.js
+#           chmod +x manifestTester.js
+#           node manifestTester.js manifest.json manifest-schema.json
 
-  # Validates links in manifest.json
-  schemaLinks_validation:
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'Skip CI')"
-    steps:
-      - uses: actions/checkout@v4
-      - name: Validating schema links in manifest.json
-        env:
-          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
-          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
-          TEST_VALUE: ${{ secrets.TEST_VALUE }}
-        run: |
-          echo "Running NodeJS setup"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-          bash ./node_setup.sh
-          echo "Running schema links validation against manifest.json"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestLinkTester.js
-          chmod +x manifestLinkTester.js
-          node manifestLinkTester.js manifest.json
+#   # Validates links in manifest.json
+#   schemaLinks_validation:
+#     runs-on: ubuntu-22.04
+#     if: "!contains(github.event.head_commit.message, 'Skip CI')"
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Validating schema links in manifest.json
+#         env:
+#           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+#           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+#           TEST_VALUE: ${{ secrets.TEST_VALUE }}
+#         run: |
+#           echo "Running NodeJS setup"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+#           bash ./node_setup.sh
+#           echo "Running schema links validation against manifest.json"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/manifestLinkTester.js
+#           chmod +x manifestLinkTester.js
+#           node manifestLinkTester.js manifest.json
 
-  # Confirms documentation files are valid
-  documentation_validation:
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'Skip CI')"
-    steps:
-      - uses: actions/checkout@v4
-      - name: Confirms documentation files are valid
-        env:
-          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
-          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
-          GENERATE_READMES: ${{ vars.GENERATE_READMES }}
-      # Runs generate readme scripts for asset readmes
-        run: |
-          echo "Running NodeJS setup"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-          bash ./node_setup.sh
-          if [ -e "documentation/documentation_mapping.json" ]; then
-            mkdir -p readmeUtils
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/validateDocumentation.js
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/assetDocumentationSchema.json
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/readmeDocumentationSchema.json
-            chmod +x readmeUtils/*
-            echo "Running documentation validation"
-            node ./readmeUtils/validateDocumentation.js
-          else
-            echo "Skipping documentation validation"
-            echo "Exiting job with a warning"
-            if [[ "${GENERATE_READMES}" == "true" ]]; then
-              exit 1
-            fi
-          fi
+#   # Confirms documentation files are valid
+#   documentation_validation:
+#     runs-on: ubuntu-22.04
+#     if: "!contains(github.event.head_commit.message, 'Skip CI')"
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Confirms documentation files are valid
+#         env:
+#           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+#           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+#           GENERATE_READMES: ${{ vars.GENERATE_READMES }}
+#       # Runs generate readme scripts for asset readmes
+#         run: |
+#           echo "Running NodeJS setup"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+#           bash ./node_setup.sh
+#           if [ -e "documentation/documentation_mapping.json" ]; then
+#             mkdir -p readmeUtils
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/validateDocumentation.js
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/assetDocumentationSchema.json
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/readmeDocumentationSchema.json
+#             chmod +x readmeUtils/*
+#             echo "Running documentation validation"
+#             node ./readmeUtils/validateDocumentation.js
+#           else
+#             echo "Skipping documentation validation"
+#             echo "Exiting job with a warning"
+#             if [[ "${GENERATE_READMES}" == "true" ]]; then
+#               exit 1
+#             fi
+#           fi
 
-# Checks if documentation/documentation_mapping.json exists and runs tools
-# to generate README markdown and metadata file if so.
-  generate_readme_metadata:
-    runs-on: ubuntu-latest
-    needs:
-      - documentation_validation
-      - schema_validation
-      - schemaLinks_validation
-    if: "!contains(github.event.head_commit.message, 'Skip CI')"
-    steps:
-      - uses: actions/checkout@v4
-      - name: Generates README and metadata files
-        env:
-          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
-          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
-          GENERATE_READMES: ${{ vars.GENERATE_READMES }}
-        # Runs generate readme scripts for asset readmes
-        run: |
-          echo "Running NodeJS setup"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-          bash ./node_setup.sh
-          if [ -e "documentation/documentation_mapping.json" ]; then
-            mkdir -p readmeUtils
-            mkdir -p tabUtils
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_readme_utils.py
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_readme.jinja2
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_readme.py
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_readme.sh
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_asset_readmes.jinja2
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_asset_readmes.py
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/map_asset_values.py
-            wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_metadata.py
-            wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/documentation-pipeline-tool.js
-            wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/projectTypeTemplates/project-templates.md
-            chmod +x tabUtils/documentation-pipeline-tool.js
-            echo "Running README generation"
-            bash ./readmeUtils/generate_readme.sh
-            echo "GENERATE_READMES: $GENERATE_READMES"
-            echo "Running TAB1 and TAB2 generation"
-            node ./tabUtils/documentation-pipeline-tool.js -p "." -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
-          else
-            echo "Skipping README generation due to documentation/documetation_mapping.json file not found. Adding required documentation will resolve this issue."
-            if [[ "$GENERATE_READMES" == "true" ]]; then
-              exit 1
-            fi
-          fi
-      - name: Upload generated markdown and metadata files
-        uses: actions/upload-artifact@v4
-        with:
-          name: readme_metadata_artifacts
-          path: |
-            README.md
-            documentation/
-            metadata.json
-            TAB1.md
-            TAB2.md
+# # Checks if documentation/documentation_mapping.json exists and runs tools
+# # to generate README markdown and metadata file if so.
+#   generate_readme_metadata:
+#     runs-on: ubuntu-22.04
+#     needs:
+#       - documentation_validation
+#       - schema_validation
+#       - schemaLinks_validation
+#     if: "!contains(github.event.head_commit.message, 'Skip CI')"
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Generates README and metadata files
+#         env:
+#           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+#           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+#           GENERATE_READMES: ${{ vars.GENERATE_READMES }}
+#         # Runs generate readme scripts for asset readmes
+#         run: |
+#           echo "Running NodeJS setup"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+#           bash ./node_setup.sh
+#           if [ -e "documentation/documentation_mapping.json" ]; then
+#             mkdir -p readmeUtils
+#             mkdir -p tabUtils
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_readme_utils.py
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_readme.jinja2
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_readme.py
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_readme.sh
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_asset_readmes.jinja2
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_asset_readmes.py
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/map_asset_values.py
+#             wget -q -P ./readmeUtils https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/readmeUtils/generate_metadata.py
+#             wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/documentation-pipeline-tool.js
+#             wget -q -P ./tabUtils https://gitlab.com/itentialopensource/opensource-common-utils/-/raw/master/projectTypeTemplates/project-templates.md
+#             chmod +x tabUtils/documentation-pipeline-tool.js
+#             echo "Running README generation"
+#             bash ./readmeUtils/generate_readme.sh
+#             echo "GENERATE_READMES: $GENERATE_READMES"
+#             echo "Running TAB1 and TAB2 generation"
+#             node ./tabUtils/documentation-pipeline-tool.js -p "." -u "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+#           else
+#             echo "Skipping README generation due to documentation/documetation_mapping.json file not found. Adding required documentation will resolve this issue."
+#             if [[ "$GENERATE_READMES" == "true" ]]; then
+#               exit 1
+#             fi
+#           fi
+#       - name: Upload generated markdown and metadata files
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: readme_metadata_artifacts
+#           path: |
+#             README.md
+#             documentation/
+#             metadata.json
+#             TAB1.md
+#             TAB2.md
 
-# Checks if documentation/documentation_mapping.json exists and runs tools
-# to generate README markdown and metadata file if so.
-  generate_artifact:
-    runs-on: ubuntu-latest
-    needs:
-      - generate_readme_metadata
-    if: "!contains(github.event.head_commit.message, 'Skip CI')"
-    steps:
-      - uses: actions/checkout@v4
-      - name: Generates artifact.json for Pre-Built
-        env:
-          NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
-          ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
-          GENERATE_READMES: ${{ vars.GENERATE_READMES }}
-        # Runs generate readme scripts for asset readmes
-        run: |
-          echo "Running NodeJS setup"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-          bash ./node_setup.sh
-          echo "Running artifact.json generation"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/generate.js
-          chmod +x generate.js
-          node generate "$GITHUB_RUN_ID" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_REF_NAME"
-      - name: Upload generated markdown and metadata files
-        uses: actions/upload-artifact@v4
-        with:
-          name: generate_artifacts
-          path: |
-            artifact.json
+# # Checks if documentation/documentation_mapping.json exists and runs tools
+# # to generate README markdown and metadata file if so.
+#   generate_artifact:
+#     runs-on: ubuntu-22.04
+#     needs:
+#       - generate_readme_metadata
+#     if: "!contains(github.event.head_commit.message, 'Skip CI')"
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Generates artifact.json for Pre-Built
+#         env:
+#           NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+#           ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+#           GENERATE_READMES: ${{ vars.GENERATE_READMES }}
+#         # Runs generate readme scripts for asset readmes
+#         run: |
+#           echo "Running NodeJS setup"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+#           bash ./node_setup.sh
+#           echo "Running artifact.json generation"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/generate.js
+#           chmod +x generate.js
+#           node generate "$GITHUB_RUN_ID" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_REF_NAME"
+#       - name: Upload generated markdown and metadata files
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: generate_artifacts
+#           path: |
+#             artifact.json
 
-# Bumps the version of package/package-lock and generates a new artifact.json
-  commit_all_artifacts:
-    runs-on: ubuntu-latest
-    needs:
-      - generate_artifact
+# Runs integration tests if release/2023.2 or master branch
+  integration_tests_20232:
+    runs-on: ubuntu-22.04
+    # needs:
+    #   - generate_artifact
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
-    env:
-      NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
-      ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
-      GENERATE_READMES: ${{ vars.GENERATE_READMES }}
-      GROUP_ACCESS_TOKEN: ${{ secrets.GROUP_ACCESS_TOKEN }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-      - name: Commits all generated files to repository
-        run: |
-          echo "Running NodeJS setup"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
-          bash ./node_setup.sh
-          echo "Running commit of artifacts"
-          wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/commit_artifacts.sh
-          bash ./commit_artifacts.sh "release_branch_secondary"
+    container: cypress/browsers:node-18.16.1-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
+    services:
+      iap:
+        image: itential.jfrog.io/itential-docker/automation-platform-demos:2023.2
+        options: |
+          entrypoint: |
+              "/bin/sh"
+              "-c"
+                |
+                while [ ! -f $CI_PROJECT_DIR/.git/index ] 
+                do 
+                  sleep 10s 
+                done
+                while [ -f $CI_PROJECT_DIR/.git/index.lock ]
+                do 
+                  sleep 10s 
+                done
+                sleep 20s
+                cp $CI_PROJECT_DIR/custom-properties.json /opt/itential/automation-platform/config/custom-properties.json
+                cd /opt/itential/automation-platform/
+                ./entrypoint.sh 
+                node server.js
+      redis:
+        image: redis:7.2
+      mongodb:
+        image: mongo:7
+
+# # Bumps the version of package/package-lock and generates a new artifact.json
+#   commit_all_artifacts:
+#     runs-on: ubuntu-22.04
+#     needs:
+#       - generate_artifact
+#     if: "!contains(github.event.head_commit.message, 'Skip CI')"
+#     env:
+#       NPMRC_TOKEN: ${{ secrets.NPMRC_TOKEN }}
+#       ARGO_NPMRC_TOKEN: ${{ secrets.ARGO_NPMRC_TOKEN }}
+#       GENERATE_READMES: ${{ vars.GENERATE_READMES }}
+#       GROUP_ACCESS_TOKEN: ${{ secrets.GROUP_ACCESS_TOKEN }}
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: actions/download-artifact@v4
+#       - name: Commits all generated files to repository
+#         run: |
+#           echo "Running NodeJS setup"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/node_setup.sh
+#           bash ./node_setup.sh
+#           echo "Running commit of artifacts"
+#           wget https://raw.githubusercontent.com/Itential-Pre-Builts/common-utils/main/scripts/commit_artifacts.sh
+#           bash ./commit_artifacts.sh "release_branch_secondary"
