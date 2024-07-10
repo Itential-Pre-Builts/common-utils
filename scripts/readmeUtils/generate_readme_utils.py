@@ -117,13 +117,13 @@ def generate_asset_readmes():
               encoded_project_file_name = None
               for file in glob.glob('./*.project.json'):
                 encoded_project_file_name = quote(file[2:])
-              asset_data['projectFileLink'] = '{}/{}/-/blob/{}/{}'.format(github_server_url, github_repository_path,
+              asset_data['projectFileLink'] = '{}/{}/blob/{}{}'.format(github_server_url, github_repository_path,
                 github_branch, encoded_project_file_name)
               if asset_data['entryPoint']['type'] == 'Operations Manager Automation':
                 # Build the url encoded link to the Operations Manager Automation 
                 om_name = asset_data['entryPoint']['name']
                 om_name_encoded = quote(om_name)
-                asset_data['operationsManagerLink'] = '{}/{}/-/blob/{}/bundles/automations/{}.json'.format(github_server_url,
+                asset_data['operationsManagerLink'] = '{}/{}/blob/{}bundles/automations/{}.json'.format(github_server_url,
                   github_repository_path, github_branch, om_name_encoded)
             # Get only required adapters
             adapters = asset_data.get('adapters', [])
@@ -317,7 +317,7 @@ def generate_readme():
             asset_jinja_data['name'] = asset['name']
             asset_jinja_data['overview'] = asset_data['overview']
             asset_md_path = asset['path'].replace('.json', '.md')
-            asset_jinja_data['href'] = '{}/{}/-/blob/{}/{}'.format(github_server_url,
+            asset_jinja_data['href'] = '{}/{}/blob/{}{}'.format(github_server_url,
                 github_repository_path, github_branch, asset_md_path)
             readme_jinja_data['assetREADMEs'].append(asset_jinja_data)
 
