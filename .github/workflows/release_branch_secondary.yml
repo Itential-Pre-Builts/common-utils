@@ -179,6 +179,9 @@ jobs:
     #   - generate_artifact
     if: "!contains(github.event.head_commit.message, 'Skip CI')"
     container: cypress/browsers:node-18.16.1-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1
+    steps:
+      - name: Runs integration tests if release/2023.2 or master branch
+        uses: actions/checkout@v4
     services:
       iap:
         image: itential.jfrog.io/itential-docker/automation-platform-demos:2023.2
