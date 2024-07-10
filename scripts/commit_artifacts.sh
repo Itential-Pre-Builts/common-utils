@@ -10,25 +10,25 @@ git config --global user.name "$GITHUB_ACTOR"
 
 # Move all readme_metadata_artifacts into expected location
 echo "Started move of readme_metadata_artifacts files"
-mv readme_metadata_artifacts/README.md .
-mv readme_metadata_artifacts/documentation .
-mv readme_metadata_artifacts/metadata.json .
-mv readme_metadata_artifacts/TAB1.md .
-mv readme_metadata_artifacts/TAB2.md .
+cp readme_metadata_artifacts/README.md .
+cp -r readme_metadata_artifacts/documentation .
+cp readme_metadata_artifacts/metadata.json .
+cp readme_metadata_artifacts/TAB1.md .
+cp readme_metadata_artifacts/TAB2.md .
 
 if [ "$WORKFLOW_TYPE" = "release_branch_primary" ]; then
   # Move all version bump and generate artifacts into expected location
   echo "Started move of version_bump_artifacts files"
-  mv version_bump_artifacts/artifact.json .
-  mv version_bump_artifacts/CHANGELOG.md .
-  mv version_bump_artifacts/package.json .
-  mv version_bump_artifacts/package-lock.json .
+  cp version_bump_artifacts/artifact.json .
+  cp version_bump_artifacts/CHANGELOG.md .
+  cp version_bump_artifacts/package.json .
+  cp version_bump_artifacts/package-lock.json .
 fi
 
 if [ "$WORKFLOW_TYPE" = "release_branch_secondary" ]; then
   # Move all generate artifacts into expected location
   echo "Started move of generate_artifacts files"
-  mv generate_artifacts/artifact.json .
+  cp generate_artifacts/artifact.json .
 fi
 
 # Conditionally removes the old manifest files
